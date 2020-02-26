@@ -1,0 +1,162 @@
+﻿@{
+    ViewBag.Title = "Buses";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<ol class="breadcrumb" style="margin-top:30px;">
+    <li class="breadcrumb-item">
+        <a href="/Dashboard/LMISDashboard">Dashboard</a>
+    </li>
+    <li class="breadcrumb-item active">Buses</li>
+</ol>
+
+@(Html.EJ().Grid<object>("Grid")
+                        .Datasource(datasource => datasource.URL("GetBuses").InsertURL("BusesInsert").UpdateURL("BusesUpdate").Adaptor(AdaptorType.UrlAdaptor))
+                        .ShowColumnChooser()
+                        .ToolbarSettings(toolBar => toolBar.ShowToolbar().ToolbarItems(items =>
+                        {
+                            items.AddTool(ToolBarItems.Add);
+                            items.AddTool(ToolBarItems.Edit);
+                            items.AddTool(ToolBarItems.Delete);
+                //items.AddTool(ToolBarItems.Update);
+                items.AddTool(ToolBarItems.Cancel);
+                            items.AddTool(ToolBarItems.Search);
+                            items.AddTool(ToolBarItems.ExcelExport);
+                        }))
+                        .AllowSearching().SearchSettings(search =>
+                        {
+                            search.Fields(fields =>
+                            {
+
+                            });
+                            search.Operator(Operator.Contains);
+                            search.IgnoreCase(true);
+                        })
+                            .EditSettings(edit => { edit.AllowAdding().AllowDeleting().AllowEditing().EditMode(EditMode.DialogTemplate).DialogEditorTemplateID("#template"); })
+                         .TextWrapSettings(wrap => { wrap.WrapMode(WrapMode.Both); })
+                        .AllowSorting().AllowFiltering().ShowColumnChooser().AllowGrouping().AllowTextWrap().AllowPaging().PageSettings(page => page.PageSize(100)).IsResponsive().AllowResizeToFit()
+                        .AllowScrolling().ScrollSettings(scroll => { scroll.Width("100%"); }).FilterSettings(filter => { filter.FilterType(FilterType.Excel); })
+                        .Columns(col =>
+
+                        {
+                            col.Field("Bus_ID").HeaderText("Bus ID").IsPrimaryKey(true).TextAlign(TextAlign.Left).Width("80").AllowEditing().Add();
+
+                            col.Field("Plate_No").HeaderText("Number Plate").TextAlign(TextAlign.Left).Priority(4).Width("140").AllowEditing().Add();
+
+                            col.Field("Seat_No").HeaderText("No. Of Seats").TextAlign(TextAlign.Left).Priority(4).Width("140").AllowEditing().Add();
+
+                            col.Field("Model").HeaderText("Model").Width("100").AllowEditing(false).Add();
+
+                            col.Field("Manufacturer").HeaderText("Manufacturer").TextAlign(TextAlign.Left).Width("200").AllowEditing().ForeignKeyField("ID").ForeignKeyValue("Manufacturer").DataSource((IEnumerable<object>)ViewBag.manufacturer).Add();
+
+                            col.Field("Route_ID").HeaderText("Assigned Route").TextAlign(TextAlign.Left).Width("200").AllowEditing().ForeignKeyField("Route_ID").ForeignKeyValue("Route_Name").DataSource((IEnumerable<object>)ViewBag.Route).Add();
+
+                            col.Field("Driver_ID").HeaderText("Assigned Driver").TextAlign(TextAlign.Left).Width("200").AllowEditing().ForeignKeyField("Employee_ID").ForeignKeyValue("Name").DataSource((IEnumerable<object>)ViewBag.Employee).Add();
+
+                            col.Field("Company").HeaderText("Company").TextAlign(TextAlign.Left).Width("200").AllowEditing().ForeignKeyField("ID").ForeignKeyValue("Name").DataSource((IEnumerable<object>)ViewBag.Company).Add();
+
+                        }).ClientSideEvents(evt => evt.ToolbarClick("OnToolbarClick9").Create("create").ActionComplete("edit")))
+
+<script type="text/template" id="template" @*style="width: 100%"*@>
+    <div style="width:1400px"></div>
+    <div id="defaultTab" style="width: 100%;">
+        <div id="tab1">
+            <table style="width:100%;" @*id="table2" border="1" cellpadding="3" cellspacing="0" border-collapse="none"*@>
+                <tr>
+                    <td style="text-align:left; width:10%;">Bus ID</td>
+                    <td style="text-align: left"> <input type="text" id="Bus_ID" style="min-width:98%;" readonly="readonly" name="Bus_ID" value="{{:Bus_ID}}" class="form-control" /> </td>
+                    <td style="text-align: left; width:10%;" id="ReceiivedDate">Number Plate</td>
+                    <td style="text-align: left;  width:50%;"> <input type="text" style="min-width:98%;" id="Plate_No" name="Plate_No" value="{{:Plate_No}}" class="form-control" /></td>
+                </tr>
+                <tr>
+
+                    <td style="text-align: left;">Number of seats</td>
+                    <td style="text-align: left"> <input type="text" style="min-width:98%;" id="Seat_No" name="Seat_No" value="{{:Seat_No}}" class="form-control" /> </td>
+
+                    <td style="text-align: left;">Bus Owner</td>
+                    <td style="text-align: left"> <input style="min-width:98%;" id="Company" name="Company" value="{{:Company}}" class="form-control" /> </td>
+                </tr>
+                <tr>
+                    <td style="text-align: left;">Bus Model</td>
+                    <td style="text-align: left"> <input style="min-width:98%;" type="text" id="Model" name="Model" value="{{:Model}}" class="form-control " /> </td>
+                    <td style="text-align: left;">Manufacturer</td>
+                    <td style="text-align: left"> <input style="min-width:98%;" type="text" id="Manufacturer" name="Manufacturer" value="{{:Manufacturer}}" class="form-control" /> </td>
+                </tr>
+                <tr>
+                    <td style="text-align: left;">Assigned Route</td>
+                    <td style="text-align: left"> <input style="min-width:98%;" type="text" id="Route_ID" name="Route_ID" value="{{:Route_ID}}" class="form-control " /> </td>
+                    <td style="text-align: left;">Assigned Driver</td>
+                    <td style="text-align: left"> <input style="min-width:98%;" type="text" id="Driver_ID" name="Driver_ID" value="{{:Driver_ID}}" class="form-control" /> </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</script>
+
+<script>
+    function edit(args) {
+        if (args.requestType == "beginedit" || args.requestType == "add") {
+            window.requestType = args.requestType;
+            $($("#EditDialog_Grid_Save").hide()).after('<button id="save" type="button" onclick="savess();" class="btn btn-success btn-sm" > <span class="glyphicon glyphicon-save"></span> Save Bus</button>');
+            $("#save").css({ "width": "200px", "height": "50px", "font-size": "17px", "float": "right", "margin-left": "10px", "margin-top": "20px", "margin-bottom": "10px" });
+            $("#EditDialog_Grid_Cancel").ejButton("destroy");
+            $($("#EditDialog_Grid_Cancel").hide()).after(' <button type="button" id="cancel" onclick="cancelss()" class="btn btn-danger btn-sm" ><span class="glyphicon glyphicon-remove-circle"></span> Cancel</button>');
+            $("#cancel").css({ "width": "100px", "height": "50px", "float": "right", "margin-left": "10px", "margin-top": "20px", "margin-bottom": "10px" });
+            $("#Grid_dialogEdit_closebutton").hide();
+            var objDialog = $("#Grid").data("ejGrid");
+            $("#" + objDialog._id + "_dialogEdit").ejDialog({ open: "open" });
+            $('#Company').ejDropDownList({
+
+                dataSource: @Html.Raw(Json.Encode(ViewBag.Company)),
+                enabled: true,
+                width: "70%",
+               // change: "setCommunicated_Lev3",
+                fields: { value: "ID", text: "Name" },
+            }).data("ejDropDownList");
+
+            $('#Manufacturer').ejDropDownList({
+
+                dataSource: @Html.Raw(Json.Encode(ViewBag.manufacturer)),
+                enabled: true,
+                width: "70%",
+               // change: "setCommunicated_Lev3",
+                fields: { value: "ID", text: "Manufacturer" },
+            }).data("ejDropDownList");
+
+            $('#Route_ID').ejDropDownList({
+
+                dataSource: @Html.Raw(Json.Encode(ViewBag.Route)),
+                enabled: true,
+                width: "70%",
+               // change: "setCommunicated_Lev3",
+                fields: { value: "Route_ID", text: "Route_Name" },
+            }).data("ejDropDownList");
+
+            $('#Driver_ID').ejDropDownList({
+
+                dataSource: @Html.Raw(Json.Encode(ViewBag.Employee)),
+                enabled: true,
+                width: "70%",
+               // change: "setCommunicated_Lev3",
+                fields: { value: "Employee_ID", text: "Name" },
+            }).data("ejDropDownList");
+
+        }
+    }
+    function open(args) {
+
+        var objDialog = $("#Grid").data("ejGrid");
+        var $dialogWrapper = objDialog.element.find("#" + objDialog._id + "_dialogEdit_wrapper");
+        $dialogWrapper.css("top", "10px");
+        $dialogWrapper.css("left", "0px");
+        $dialogWrapper.css("right", "0px");
+    }
+    function savess(args) {
+        var obj = $("#Grid").ejGrid("instance");
+        obj.endEdit();
+        obj.refreshContent();
+    }
+    function cancelss(args) {
+        var obj = $("#Grid").ejGrid("instance")
+        obj.cancelEdit();
+    }
+</script>

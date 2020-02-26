@@ -1,0 +1,385 @@
+﻿
+@{
+    ViewBag.Title = "Bus Booking";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link href="~/Content/Main.css" rel="stylesheet" />
+<ol class="breadcrumb" style="margin-top:30px;">
+    <li class="breadcrumb-item">
+        <a href="/Dashboard/LMISDashboard">Dashboard</a>
+    </li>
+    <li class="breadcrumb-item active">Bus Booking</li>
+</ol>
+
+
+@(Html.EJ().Grid<object>("Grid")
+                            .Datasource(datasource => datasource.URL("GetBookings").InsertURL("SchedulesInsert").UpdateURL("SchedulesUpdate").Adaptor(AdaptorType.UrlAdaptor))
+                            .ShowColumnChooser()
+                            .ToolbarSettings(toolBar => toolBar.ShowToolbar().ToolbarItems(items =>
+                            {
+                                items.AddTool(ToolBarItems.Add);
+                                //items.AddTool(ToolBarItems.Edit);
+                                //items.AddTool(ToolBarItems.Delete);
+                                //items.AddTool(ToolBarItems.Update);
+                                items.AddTool(ToolBarItems.Cancel);
+                                items.AddTool(ToolBarItems.Search);
+                                items.AddTool(ToolBarItems.ExcelExport);
+                            }))
+                            .AllowSearching().SearchSettings(search =>
+                            {
+                                search.Fields(fields =>
+                                {
+
+                                });
+                                search.Operator(Operator.Contains);
+                                search.IgnoreCase(true);
+                            })
+                                .EditSettings(edit => { edit.AllowAdding().AllowDeleting(false).AllowEditing(false).EditMode(EditMode.DialogTemplate).DialogEditorTemplateID("#template"); })
+                             .TextWrapSettings(wrap => { wrap.WrapMode(WrapMode.Both); })
+                            .AllowSorting().AllowFiltering().ShowColumnChooser().AllowGrouping().AllowTextWrap().AllowPaging().PageSettings(page => page.PageSize(100)).IsResponsive().AllowResizeToFit()
+                            .AllowScrolling().ScrollSettings(scroll => { scroll.Width("100%"); }).FilterSettings(filter => { filter.FilterType(FilterType.Excel); })
+                            .Columns(col =>
+
+                            {
+                                col.Field("Schedule_ID").HeaderText("Schedule ID").IsPrimaryKey(true).TextAlign(TextAlign.Left).Width("80").AllowEditing().Add();
+
+                                col.Field("Booking_Status").HeaderText("Booking Status").TextAlign(TextAlign.Left).Priority(4).Width("100").AllowEditing().Add();
+
+                                col.Field("Boarding_Time").HeaderText("Boarding Date and Time").Format("{0:dd/MM/yyyy HH:mm:ss}").TextAlign(TextAlign.Left).Priority(4).Width("140").AllowEditing().Add();
+
+                                col.Field("Departure_Time").HeaderText("Departure Date and Time").Format("{0:dd/MM/yyyy HH:mm:ss}").TextAlign(TextAlign.Left).Priority(4).Width("140").AllowEditing().Add();
+
+                                col.Field("Arrival_Time").HeaderText("Arrival Date And Time").Format("{0:dd/MM/yyyy HH:mm:ss}").Width("100").AllowEditing(false).Add();
+
+                                col.Field("Plate_No").HeaderText("Bus Plate No").TextAlign(TextAlign.Left).Width("100").Add();
+
+                                col.Field("Route_Name").HeaderText("Route").AllowFiltering(false).Width("150").AllowEditing().Add();
+
+                                col.Field("Booked_seats").HeaderText("No. of Booked seats").IsPrimaryKey(true).TextAlign(TextAlign.Left).Width("80").AllowEditing().Add();
+
+                                col.Field("Remaining_Seats").HeaderText("No. of Remaining Seats").IsPrimaryKey(true).TextAlign(TextAlign.Left).Width("80").AllowEditing().Add();
+
+                            }).ClientSideEvents(evt => evt/*.ToolbarClick("OnToolbarClick9")*/.Create("create").ActionComplete("edit").QueryCellInfo("cellmerge").ActionBegin("OnBegin")))
+
+<script type="text/template" id="template" @*style="width: 100%"*@>
+    <div style="width:1400px"></div>
+    <div id="defaultTab" style="width: 100%;">
+        <div id="tab1">
+            <table style="width:100%;" @*id="table2" border="1" cellpadding="3" cellspacing="0" border-collapse="none"*@>
+                <tr>
+                    <td style="text-align:left; width:10%;">Ticket No</td>
+                    <td style="text-align: left"> <input type="text" id="Ticket_No" style="min-width:70%;" readonly="readonly" name="Ticket_No" value="{{:Ticket_No}}" class="form-control" /> </td>
+                </tr>
+                <tr>
+                    <td style="text-align: left;">Available buses</td>
+                    <td style="text-align: left"> <input style="min-width:70%;" type="text" id="Schedule_ID" name="Schedule_ID" value="{{:Schedule_ID}}" class="form-control" /> </td>
+                </tr>
+                <tr>
+                    <td style="text-align: left; width:10%;">Customer Name</td>
+                    <td style="text-align: left;  width:50%;"> <input type="text" style="min-width:70%;" id="CustomerName" name="CustomerName" value="{{:CustomerName}}" class="form-control" /></td>
+                </tr>
+                <tr>
+                    <td style="text-align: left;">Seat No</td>
+                    <td style="text-align: left"> <input type="text" style="min-width:70%;" id="Seat_No" name="Seat_No" value="{{:Seat_No}}" class="form-control" /> </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <h3> Choose seats by clicking the corresponding seat in the layout below:</h3>
+                        <div id="holder">
+                            <ul id="place"></ul>
+                        </div>
+                        <div style="float:left;">
+                            <ul id="seatDescription">
+                                <li style="background:url('../images/available_seat_img.gif') no-repeat scroll 0 0 transparent;">Available Seat</li>
+                                <li style="background:url('../images/booked_seat_img.gif') no-repeat scroll 0 0 transparent;">Booked Seat</li>
+                                <li style="background:url('../images/selected_seat_img.gif') no-repeat scroll 0 0 transparent;">Selected Seat</li>
+                            </ul>
+                        </div>
+                        <div style="clear:both;width:100%">
+                            <input type="button" id="btnShowNew" onclick="ShowNew()" value="Show Selected Seats" />
+                            <input type="button" onclick="btnShowAll()" id="btnShow" value="Show All" />
+                        </div>
+                    </td>
+                </tr>
+                @*<tr>
+                    <td style="text-align: left;">Company</td>
+                    <td style="text-align: left"> <input style="min-width:70%;" id="Company" name="Company" value="{{:Company}}" class="form-control" /> </td>
+                </tr>
+                <tr>
+                    <td style="text-align: left;">Description</td>
+                    <td style="text-align: left"> <textarea style="min-width:70%;" cols="5" rows="5" type="text" id="Route_Description" name="Route_Description" value="{{:Route_Description}}" class="form-control ">{{:Route_Description}}</textarea> </td>
+                </tr>*@
+            </table>
+        </div>
+    </div>
+</script>
+
+<script>
+    var settings = {
+        rows: 5,
+        cols: 15,
+        rowCssPrefix: 'row-',
+        colCssPrefix: 'col-',
+        seatWidth: 35,
+        seatHeight: 35,
+        seatCss: 'seat',
+        selectedSeatCss: 'selectedSeat',
+        selectingSeatCss: 'selectingSeat'
+    };
+    var init = function (reservedSeat) {
+        var str = [], seatNo, className;
+        for (i = 0; i < settings.rows; i++) {
+            for (j = 0; j < settings.cols; j++) {
+                seatNo = (i + j * settings.rows + 1);
+                className = settings.seatCss + ' ' + settings.rowCssPrefix + i.toString() + ' ' + settings.colCssPrefix + j.toString();
+                if ($.isArray(reservedSeat) && $.inArray(seatNo, reservedSeat) != -1) {
+                    className += ' ' + settings.selectedSeatCss;
+                }
+                str.push('<li id="Seat_' + seatNo + '" onClick="SelecetedSeat(Seat_' + seatNo + ')" class="' + className + '"' +
+                    'style="top:' + (i * settings.seatHeight).toString() + 'px;left:' + (j * settings.seatWidth).toString() + 'px">' +
+                    '<a title="' + seatNo + '">' + seatNo + '</a>' +
+                    '</li>');
+            }
+        }
+        $('#place').html(str.join(''));
+    };
+    $('.' + settings.seatCss).click(function () {
+        alert("No");
+        if ($(this).hasClass(settings.selectedSeatCss)) {
+            alert('This seat is already reserved');
+        }
+        else {
+            $(this).toggleClass(settings.selectingSeatCss);
+        }
+    });
+    function SelecetedSeat(args) {
+        var doc = document.getElementById(args.id);
+        //if ($(this).hasClass(settings.selectedSeatCss)) {
+        //    alert('This seat is already reserved');
+        //}
+        if (doc.classList.contains(settings.selectedSeatCss)) {
+            alert('This seat is already reserved');
+        }
+        else {
+            //$(this.id).toggleClass(settings.selectingSeatCss);
+            //doc.classList.remove(settings.seatCss);
+            //doc.classList.add(settings.selectingSeatCss);
+            doc.classList.toggle(settings.selectingSeatCss);
+        }
+    }
+    function ShowNew() {
+        var str = [], item;
+        $.each($('#place li.' + settings.selectingSeatCss + ' a'), function (index, value) {
+            item = $(this).attr('title');
+            str.push(item);
+        });
+        alert(str.join(','));
+    }
+    function btnShowAll() {
+        var str = [];
+        $.each($('#place li.' + settings.selectedSeatCss + ' a, #place li.' + settings.selectingSeatCss + ' a'), function (index, value) {
+            str.push($(this).attr('title'));
+        });
+        alert(str.join(','));
+    }
+    $('#btnShow').click(function () {
+        var str = [];
+        $.each($('#place li.' + settings.selectedSeatCss + ' a, #place li.' + settings.selectingSeatCss + ' a'), function (index, value) {
+            str.push($(this).attr('title'));
+        });
+        alert(str.join(','));
+    })
+
+    $('#btnShowNew').click(function () {
+        var str = [], item;
+        $.each($('#place li.' + settings.selectingSeatCss + ' a'), function (index, value) {
+            item = $(this).attr('title');
+            str.push(item);
+        });
+        alert(str.join(','));
+    })
+
+    function OnBegin(args) {
+        if (args.requestType == "add") {
+            var available = @Html.Raw(Json.Encode(ViewBag.schedule));
+            if (available.length==0) {
+                args.cancel = true;
+               alert("There is no bus available for booking please schedule your buses.");
+            }
+        }
+    }
+    function edit(args) {
+        if (args.requestType == "beginedit" || args.requestType == "add") {
+            window.requestType = args.requestType;
+            
+            $($("#EditDialog_Grid_Save").hide()).after('<button id="save" type="button" onclick="savess();" class="btn btn-success btn-sm" > <span class="glyphicon glyphicon-save"></span> Save Schedule</button>');
+            $("#save").css({ "width": "200px", "height": "50px", "font-size": "17px", "float": "right", "margin-left": "10px", "margin-top": "20px", "margin-bottom": "10px" });
+            $("#EditDialog_Grid_Cancel").ejButton("destroy");
+            $($("#EditDialog_Grid_Cancel").hide()).after(' <button type="button" id="cancel" onclick="cancelss()" class="btn btn-danger btn-sm" ><span class="glyphicon glyphicon-remove-circle"></span> Cancel</button>');
+            $("#cancel").css({ "width": "100px", "height": "50px", "float": "right", "margin-left": "10px", "margin-top": "20px", "margin-bottom": "10px" });
+            $("#Grid_dialogEdit_closebutton").hide();
+            var objDialog = $("#Grid").data("ejGrid");
+            $("#" + objDialog._id + "_dialogEdit").ejDialog({ open: "open" });
+            $('#Schedule_ID').ejDropDownList({
+
+                dataSource: @Html.Raw(Json.Encode(ViewBag.schedule)),
+                enabled: true,
+                width: "70%",
+                enableFilterSearch: true, 
+                change: "SelecetedSchedule",
+                fields: { value: "ID", text: "Schedule_Desc" },
+            }).data("ejDropDownList");
+
+            @*$('#Status_ID').ejDropDownList({
+
+                dataSource: @Html.Raw(Json.Encode(ViewBag.Status)),
+                enabled: true,
+                width: "70%",
+                enableFilterSearch: true,
+               // change: "setCommunicated_Lev3",
+                fields: { value: "Status_ID", text: "Status_Desc" },
+            }).data("ejDropDownList");
+            $('#Bus_ID').ejDropDownList({
+
+                dataSource: @Html.Raw(Json.Encode(ViewBag.Buses)),
+                enabled: true,
+                width: "70%",
+                enableFilterSearch: true,
+               // change: "setCommunicated_Lev3",
+                fields: { value: "Bus_ID", text: "Plate_No" },
+            }).data("ejDropDownList");
+            $("#Boarding_Time").ejDateTimePicker(
+                {
+                    width: '70%',
+                    dateFormat: "dd/MM/yyyy HH:mm:ss"
+                }
+            );
+            $("#Departure_Time").ejDateTimePicker(
+                {
+                    width: '70%',
+                    dateFormat: "dd/MM/yyyy HH:mm:ss"
+                }
+            );
+            $("#Arrival_Time").ejDateTimePicker(
+                {
+                    width: '70%',
+                    dateFormat: "dd/MM/yyyy HH:mm:ss"
+                }
+            );*@
+            if (args.requestType == "add") {
+                $.ajax({
+                    url: "GETComplaintCode",
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    type: 'Get',
+                    success: function (result) {
+                        $("#Ticket_No").val(result)
+                    },
+                });
+            }
+
+        }
+    }
+    function open(args) {
+
+        var objDialog = $("#Grid").data("ejGrid");
+        var $dialogWrapper = objDialog.element.find("#" + objDialog._id + "_dialogEdit_wrapper");
+        $dialogWrapper.css("top", "10px");
+        $dialogWrapper.css("left", "0px");
+        $dialogWrapper.css("right", "0px");
+    }
+    function savess(args) {
+
+        var str = [], item;
+        $.each($('#place li.' + settings.selectingSeatCss + ' a'), function (index, value) {
+            item = $(this).attr('title');
+            str.push(item);
+        });
+        var _Seat_No = str.join(',');
+        if (_Seat_No == null || _Seat_No == "") {
+            alert("Please select the seat number inorder to book a ticket");
+            return false;
+        }
+
+        var Schedule = $('#Schedule_ID').data("ejDropDownList");
+        $.ajax({
+            url: "AddBooking",
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            type: 'Get',
+            data: {
+                'Ticket_No':$("#Ticket_No").val(),
+                'Schedule_ID': Schedule.option("value"),
+                'CustomerName': $("#CustomerName").val(),
+                'Seat_No': _Seat_No,
+                //'':,
+            },
+            success: function (result) {
+               
+            },
+        });
+        var obj = $("#Grid").ejGrid("instance");
+        //obj.endEdit();
+        obj.cancelEdit();
+        obj.refreshContent();
+    }
+    function cancelss(args) {
+        var obj = $("#Grid").ejGrid("instance")
+        obj.cancelEdit();
+    }
+    function SelecetedSchedule(args) {
+        var id = args.value;
+        $.ajax({
+            url: "GETSelecetedSchedule",
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            type: 'Get',
+            data: {
+                'ID': id
+            },
+            success: function (result) {
+                debugger;
+                if (result.length > 0) {
+                    //when the bus has booked seats
+                    var bookedSeats = [];
+                    for (var i = 0; i <= (result.length - 1); i++) {
+                        bookedSeats[i] = result[i].Seat_No;
+                    }
+                    init(bookedSeats);
+                }
+                else {
+                    //when the bus has np booked seat
+                    init();
+                }
+                    
+            },
+        });
+    }
+</script>
+<script>
+    function cellmerge(args) {
+        if (args.column.field == "Booking_Status") {
+            if (args.rowData.Booking_Status != null && args.rowData.Booking_Status.includes('Available')) {
+                $(args.cell).css("backgroundColor", "green").css("color", "white").css("font-weight", "bold");
+            }
+            if (args.rowData.Booking_Status != null && args.rowData.Booking_Status.includes('Closed')) {
+                $(args.cell).css("backgroundColor", "maroon").css("color", "white").css("font-weight", "bold");
+            }
+            if (args.rowData.Booking_Status != null && args.rowData.Booking_Status.includes('Booked Out')) {
+                $(args.cell).css("backgroundColor", "red").css("color", "white").css("font-weight", "bold");
+            }
+        }
+        if (args.column.field == "Remaining_Seats") {
+            if (args.rowData.Remaining_Seats != null && (args.rowData.Booking_Status.includes('Available') && args.rowData.Remaining_Seats < 5)) {
+                $(args.cell).css("backgroundColor", "yellow").css("color", "black").css("font-weight", "bold");
+            }
+            if (args.rowData.Remaining_Seats != null && (args.rowData.Booking_Status.includes('Available') && args.rowData.Remaining_Seats > 5)) {
+                $(args.cell).css("backgroundColor", "green").css("color", "white").css("font-weight", "bold");
+            }
+            if (args.rowData.Remaining_Seats != null && (args.rowData.Booking_Status.includes('Booked Out') || args.rowData.Booking_Status.includes('Closed'))) {
+                $(args.cell).css("backgroundColor", "red").css("color", "white").css("font-weight", "bold");
+            }
+        }
+    }
+</script>
+

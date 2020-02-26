@@ -1,0 +1,227 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title | Bus Management</title>
+    @Styles.Render("~/Content/css")
+    @Styles.Render("~/Content/ej/web/flat-saffron/ej.web.all.min.css")
+    @Scripts.Render("~/Scripts/jquery-3.2.1.min.js")
+    @Scripts.Render("~/Scripts/jsrender.min.js")
+    @Scripts.Render("~/Scripts/ej/ej.web.all.min.js")
+    <style>
+        .container {
+            margin-left: 2%;
+            min-width: 97%;
+            width: 97%;
+            padding: 0px;
+            margin-right: 2%;
+        }
+
+        #Wrapper {
+            /*background-color: #3F51B5;*/
+            z-index: 1;
+            height: 500px;
+            width: 100%;
+            position: fixed;
+        }
+
+        #page-content-wrapper {
+            margin-left: 20px;
+            margin-right: 7px;
+        }
+    </style>
+    <style>
+        .panel-default > .panel-heading {
+            background-color: #0071bc /*#3e1111*/;
+            color: white;
+            /*font-size: 12px;*/
+            /*background-color:silver;*/
+            /*color: white;*/
+        }
+
+        .panel-default > .panel-collapse {
+            background-color: white /*#3e1111*/;
+            color: black;
+            /*font-size: 12px;*/
+            /*background-color:silver;*/
+            /*color: white;*/
+        }
+    </style>
+</head>
+<body>
+    @*<div class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    @Html.ActionLink("Application name", "Index", "Home", null, new { @class = "navbar-brand" })
+                </div>
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                        <li>@Html.ActionLink("About", "About", "Home")</li>
+                        <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                    </ul>
+                    @Html.Partial("_LoginPartial")
+                </div>
+            </div>
+        </div>*@
+    <div class="navbar navbar-fixed-top">
+
+        @*@if (@ViewBag.Dash != "YES")
+        {
+            @Html.Partial("_LoginPartial")
+        }*@
+        @Html.Partial("_LoginPartial")
+
+        @Html.EJ().Menu("mainMenu").Items(items =>
+   {
+       items.Add().Url(Url.Action("DashBoard", "DashBoardIndex")).Text("Home");
+       if (User.IsInRole("Super Administrator"))
+       {
+           items.Add().Url("#").Text("Company").Children(child1 =>
+           {
+               child1.Add().Url(Url.Action("Companies", "Utilities")).Text("Add/Edit Company");
+               //child1.Add().Url(Url.Action("CCU", "fo_complaint")).Text("View Complaints");
+           });
+       }
+       if (User.IsInRole("Super Administrator") || User.IsInRole("Administrator"))
+       {
+           items.Add().Url("#").Text("Employees").Children(child1 =>
+           {
+               child1.Add().Url(Url.Action("Employees", "Employees")).Text("Add/Edit Employees");
+               //child1.Add().Url(Url.Action("CCU", "fo_complaint")).Text("View Complaints");
+           });
+           items.Add().Url("#").Text("Buses").Children(child1 =>
+           {
+               child1.Add().Url(Url.Action("Buses", "Utilities")).Text("Add/Edit Buses");
+               //child1.Add().Url(Url.Action("CCU", "fo_complaint")).Text("View Complaints");
+           });
+           items.Add().Url("#").Text("Routes").Children(child1 =>
+           {
+               child1.Add().Url(Url.Action("Routes", "Utilities")).Text("Add/Edit Routes");
+               //child1.Add().Url(Url.Action("CCU", "fo_complaint")).Text("View Complaints");
+           });
+       }
+       if (User.IsInRole("Super Administrator") || User.IsInRole("Administrator") || User.IsInRole("Data Entrant"))
+       {
+           items.Add().Url("").Text("Schedules").Children(child2 =>
+           {
+               child2.Add().Url(Url.Action("Scheduling", "Utilities")).Text("Add/Edit Schedules");
+               //child2.Add().Id("ContactPersonCCU2").Url(Url.Action("FacilityContacts", "fo_contact_person")).Text("Facility Contacts");
+               //child2.Add().Id("ContactPersonCCU3").Url(Url.Action("ContactPerson", "fo_contact_person")).Text("Other Stakeholder Contacts");
+           });
+           items.Add().Url(Url.Action("BusBooking", "Booking")).Text("Ticket Booking");
+       }
+
+       //if (User.IsInRole("Super Administrator"))
+       //{
+
+       //}
+       //if (User.IsInRole("Administrator"))
+       //{
+
+       //}
+       //if (User.IsInRole("Data Entrant"))
+       //{
+
+       //}
+
+       //items.Add().Url("#").Text("M&E").Children(child =>
+       //{
+       //    //child.Add().Id("ComplaintsCCU").Url(Url.Action("Complaints", "fo_complaint")).Text("Customer Care Unit (CCU)");
+       //});
+
+       //items.Add().Id("ScheduleEvent").Url("#").Text("Schedule Events Calender").Children(child =>
+       //{
+       //    //child.Add().Id("Register").Url(Url.Action("Register", "Account")).Text("Register Users");
+       //    child.Add().Id("ScheduleEvent1").Url(Url.Action("ScheduleEvent", "ScheduleEvents")).Text("Schedule Events / Tasks");
+       //});
+       //items.Add().Id("CCUResource").Url("#").Text("Resources").Children(child =>
+       //{
+       //    //child.Add().Id("Maps2").Url("../GIS_Maps/GISMaps.aspx").Text("GIS Maps");
+       //    child.Add().Id("Maps1").Url(Url.Action("FacilityMap", "Maps")).Text("MAUL Facility Maps");
+       //    child.Add().Id("ManualsCCU").Url("#").Text("User Manual").Children(child1 =>
+       //    {
+       //        child1.Add().Id("ManualCCU1").Url("../Manual_Facility.pdf").Text("Facility Manual");
+       //        child1.Add().Id("ManualCCU2").Url("../Manual_LMIS.pdf").Text("LMIS Manual");
+       //    });
+       //});
+       //if (@ViewBag.Dash == "YES")
+       //{
+       //    items.Add().Url("#").Id("HSIPLogin6").Text("Hello " + User.Identity.Name).Children(child =>
+       //    {
+       //        if (User.IsInRole("Administrator"))
+       //        {
+       //            //child.Add().Id("Register1").Url(Url.Action("Register", "Account")).Text("Register Users");
+       //            // child.Add().Id("ManageUsers1").Url(Url.Action("Usermanagement", "Account")).Text("Manage Users");
+       //            //child.Add().Id("ResetPassword1").Url(Url.Action("ResetPassword", "Account")).Text("Reset Password");
+       //            child.Add().Id("Logout1").Url(Url.Action("Login", "Account")).Text("Log out");
+       //        }
+       //        else
+       //        {
+       //            child.Add().Id("ResetPassword2").Url(Url.Action("ResetPassword", "Account")).Text("Reset Password");
+       //            child.Add().Id("Logout2").Url(Url.Action("Login", "Account")).Text("Log out");
+       //        }
+
+       //    });
+       //}
+
+   }).EnableSeparator(false).CssClass("Black-Menu")
+    </div>
+
+    <div class="container body-content">
+        @RenderBody()
+    </div>
+    <footer>
+        <div class="container body-content">
+            <hr />
+            <p>&copy; @DateTime.Now.Year - Bus Management System <b style="float:right;">@DateTime.Now.ToLongDateString()  @DateTime.Now.ToShortTimeString()</b></p>
+
+        </div>
+    </footer>
+
+    @Html.EJ().ScriptManager()
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>
+<script>
+    function create() {
+        //$("#" + this._id + "_search").append("Search");
+        $("#" + this._id + "_add").append("Add");
+        $("#" + this._id + "_edit").append("Edit");
+        $("#" + this._id + "_delete").append("Delete");
+        $("#" + this._id + "_update").append("Update");
+        $("#" + this._id + "_cancel").append("Cancel");
+        $("#" + this._id + "_printGrid").append("Print");
+    }
+</script>
+<script type="text/javascript">
+    jQuery(function ($) {
+        var menuObj = $("#mainMenu").ejMenu({ width: "100%", enableSeparator: false });
+    });
+
+</script>
+<style type="text/css" class="cssStyles">
+    #More, #Utilities, #Register, #Help, #ManageUsers, #Sign_In {
+        float: right;
+    }
+</style>
+
+<style type="text/css" class="cssStyles">
+
+    .Black-Menu .e-menu, .e-menu.e-horizontal .e-list > ul {
+        background: #080B00;
+        font-family: Cambria;
+    }
+
+        .Black-Menu .e-menu.e-horizontal .e-list > a {
+            color: white;
+            font-size: large;
+        }
+</style>

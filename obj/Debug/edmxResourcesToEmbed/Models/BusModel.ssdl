@@ -1,0 +1,907 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Bus_Ticketing_SystemModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="A_Buses">
+    <Key>
+      <PropertyRef Name="Bus_ID" />
+    </Key>
+    <Property Name="Bus_ID" Type="int" Nullable="false" />
+    <Property Name="Company" Type="int" />
+    <Property Name="Driver_ID" Type="int" />
+    <Property Name="Manufacturer" Type="int" />
+    <Property Name="Route_ID" Type="int" />
+    <Property Name="Model" Type="varchar" MaxLength="4000" />
+    <Property Name="Plate_No" Type="varchar" MaxLength="4000" />
+    <Property Name="Seat_No" Type="int" />
+    <Property Name="CreatedBy" Type="varchar" MaxLength="2000" />
+    <Property Name="CreationDate" Type="datetime" />
+    <Property Name="EditedBy" Type="varchar" MaxLength="2000" />
+    <Property Name="EditionDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="A_Companies">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" />
+    <Property Name="Location" Type="nvarchar(max)" />
+    <Property Name="CountryCode" Type="nchar" MaxLength="10" />
+    <Property Name="Phone" Type="nvarchar" MaxLength="50" />
+    <Property Name="Email" Type="nvarchar" MaxLength="3000" />
+  </EntityType>
+  <EntityType Name="A_Contact_Type">
+    <Key>
+      <PropertyRef Name="ContactID" />
+    </Key>
+    <Property Name="ContactID" Type="int" Nullable="false" />
+    <Property Name="Contact_Desc" Type="nvarchar" MaxLength="150" />
+  </EntityType>
+  <EntityType Name="A_Country">
+    <Key>
+      <PropertyRef Name="CountryCode" />
+    </Key>
+    <Property Name="CountryCode" Type="nchar" MaxLength="10" Nullable="false" />
+    <Property Name="CountryName" Type="nvarchar" MaxLength="150" />
+  </EntityType>
+  <EntityType Name="A_Customer">
+    <Key>
+      <PropertyRef Name="Customer_ID" />
+    </Key>
+    <Property Name="Customer_ID" Type="int" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="4000" />
+    <Property Name="Email" Type="varchar" MaxLength="4000" />
+    <Property Name="Phone" Type="varchar" MaxLength="1000" />
+    <Property Name="Telephone" Type="varchar" MaxLength="1000" />
+    <Property Name="Gender" Type="nchar" MaxLength="2" />
+    <Property Name="Nationality" Type="nchar" MaxLength="10" />
+    <Property Name="User_Id" Type="nvarchar" MaxLength="128" />
+    <Property Name="Photo" Type="varbinary(max)" />
+    <Property Name="Date_Of_Birth" Type="date" />
+  </EntityType>
+  <EntityType Name="A_Employees">
+    <Key>
+      <PropertyRef Name="Employee_ID" />
+    </Key>
+    <Property Name="Employee_ID" Type="int" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="4000" />
+    <Property Name="Email" Type="varchar" MaxLength="4000" />
+    <Property Name="Phone" Type="varchar" MaxLength="1000" />
+    <Property Name="Telephone" Type="varchar" MaxLength="1000" />
+    <Property Name="NIN_No" Type="varchar" MaxLength="4000" />
+    <Property Name="Gender" Type="nchar" MaxLength="2" />
+    <Property Name="Nationality" Type="nchar" MaxLength="10" />
+    <Property Name="Company" Type="int" />
+    <Property Name="Title" Type="int" />
+    <Property Name="User_Id" Type="nvarchar" MaxLength="128" />
+    <Property Name="Photo" Type="varbinary(max)" />
+    <Property Name="Date_Of_Birth" Type="date" />
+    <Property Name="CreatedBy" Type="varchar" MaxLength="2000" />
+    <Property Name="CreationDate" Type="datetime" />
+    <Property Name="EditedBy" Type="varchar" MaxLength="2000" />
+    <Property Name="EditionDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="A_Gender">
+    <Key>
+      <PropertyRef Name="Gender_Code" />
+    </Key>
+    <Property Name="Gender_Code" Type="nchar" MaxLength="2" Nullable="false" />
+    <Property Name="Gender_Desc" Type="nchar" MaxLength="20" />
+  </EntityType>
+  <EntityType Name="A_Level_Of_Education">
+    <Key>
+      <PropertyRef Name="LevelID" />
+    </Key>
+    <Property Name="LevelID" Type="int" Nullable="false" />
+    <Property Name="LevelDesc" Type="nvarchar" MaxLength="200" />
+  </EntityType>
+  <EntityType Name="A_Manufacturer">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="Manufacturer" Type="varchar" MaxLength="4000" />
+  </EntityType>
+  <EntityType Name="A_Personel_Titles">
+    <Key>
+      <PropertyRef Name="Title_ID" />
+    </Key>
+    <Property Name="Title_ID" Type="int" Nullable="false" />
+    <Property Name="Title_Desc" Type="varchar" MaxLength="4000" />
+  </EntityType>
+  <EntityType Name="A_Routes">
+    <Key>
+      <PropertyRef Name="Route_ID" />
+    </Key>
+    <Property Name="Route_ID" Type="int" Nullable="false" />
+    <Property Name="Route_Name" Type="varchar" MaxLength="2000" />
+    <Property Name="Start_Stage" Type="varchar" MaxLength="2000" />
+    <Property Name="Destination_Stage" Type="varchar" MaxLength="2000" />
+    <Property Name="Route_Description" Type="varchar" MaxLength="4000" />
+    <Property Name="Company" Type="int" />
+  </EntityType>
+  <EntityType Name="A_Schedule_Status">
+    <Key>
+      <PropertyRef Name="Status_ID" />
+    </Key>
+    <Property Name="Status_ID" Type="int" Nullable="false" />
+    <Property Name="Status_Desc" Type="varchar" MaxLength="4000" />
+  </EntityType>
+  <EntityType Name="AspNetRoles">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="256" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Bus_Scheduling">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="Bus_ID" Type="int" Nullable="false" />
+    <Property Name="Departure_Time" Type="datetime" Nullable="false" />
+    <Property Name="Status_ID" Type="int" />
+    <Property Name="Arrival_Time" Type="datetime" />
+    <Property Name="Company_ID" Type="int" />
+    <Property Name="Boarding_Time" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Customer_Booking">
+    <Key>
+      <PropertyRef Name="Booking_ID" />
+    </Key>
+    <Property Name="Booking_ID" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Schedule_ID" Type="int" />
+    <Property Name="Customer_ID" Type="int" />
+    <Property Name="Customer_Location" Type="nvarchar" MaxLength="1000" />
+    <Property Name="Customer_Comfirmed" Type="bit" />
+  </EntityType>
+  <EntityType Name="CustomerNOK">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="Customer_ID" Type="int" />
+    <Property Name="Name" Type="nvarchar" MaxLength="4000" />
+    <Property Name="ContactType" Type="int" />
+    <Property Name="Telephone" Type="nvarchar" MaxLength="50" />
+    <Property Name="Mobile" Type="nvarchar" MaxLength="50" />
+    <Property Name="Email" Type="nvarchar" MaxLength="2000" />
+    <Property Name="NIN_Number" Type="nvarchar" MaxLength="2000" />
+    <Property Name="Address" Type="nvarchar" MaxLength="2000" />
+    <Property Name="Gender" Type="nchar" MaxLength="2" />
+  </EntityType>
+  <EntityType Name="Education">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="EmployeeID" Type="int" />
+    <Property Name="Name" Type="nvarchar(max)" />
+    <Property Name="Level_Of_Education" Type="int" />
+    <Property Name="Grade" Type="nvarchar" MaxLength="50" />
+    <Property Name="Certificate" Type="varbinary(max)" />
+    <Property Name="School" Type="nvarchar" MaxLength="4000" />
+    <Property Name="Start_Year" Type="int" />
+    <Property Name="End_Year" Type="int" />
+  </EntityType>
+  <EntityType Name="Employee_NOK">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="Employee_ID" Type="int" />
+    <Property Name="Name" Type="nvarchar" MaxLength="4000" />
+    <Property Name="ContactType" Type="int" />
+    <Property Name="Telephone" Type="nvarchar" MaxLength="50" />
+    <Property Name="Mobile" Type="nvarchar" MaxLength="50" />
+    <Property Name="Email" Type="nvarchar" MaxLength="2000" />
+    <Property Name="NIN_Number" Type="nvarchar" MaxLength="2000" />
+    <Property Name="Address" Type="nvarchar" MaxLength="2000" />
+    <Property Name="Gender" Type="nchar" MaxLength="2" />
+  </EntityType>
+  <EntityType Name="Online_Ticketing">
+    <Key>
+      <PropertyRef Name="Ticket_No" />
+    </Key>
+    <Property Name="Ticket_No" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="Schedule_ID" Type="int" />
+    <Property Name="CustomerName" Type="nvarchar" MaxLength="4000" />
+    <Property Name="Customer_ID" Type="int" />
+  </EntityType>
+  <EntityType Name="Stage_Ticketing">
+    <Key>
+      <PropertyRef Name="Ticket_No" />
+    </Key>
+    <Property Name="Ticket_No" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="Schedule_ID" Type="int" />
+    <Property Name="CustomerName" Type="nvarchar" MaxLength="4000" />
+    <Property Name="Ticket_DateTime" Type="datetime" />
+    <Property Name="Issued_BY" Type="nvarchar" MaxLength="4000" />
+    <Property Name="Edited_By" Type="nvarchar" MaxLength="4000" />
+    <Property Name="Edited_Date" Type="datetime" />
+    <Property Name="Seat_No" Type="int" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'Bus_Ticketing_System.dbo.View_Employee_Education' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="View_Employee_Education">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="EmployeeID" Type="int" />
+    <Property Name="Name" Type="nvarchar(max)" />
+    <Property Name="Level_Of_Education" Type="int" />
+    <Property Name="Grade" Type="nvarchar" MaxLength="50" />
+    <Property Name="School" Type="nvarchar" MaxLength="4000" />
+    <Property Name="Start_Year" Type="int" />
+    <Property Name="End_Year" Type="int" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'Bus_Ticketing_System.dbo.View_Scheduling' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="View_Scheduling">
+    <Key>
+      <PropertyRef Name="ID" />
+      <PropertyRef Name="Bus_ID" />
+      <PropertyRef Name="Departure_Time" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="Bus_ID" Type="int" Nullable="false" />
+    <Property Name="Plate_No" Type="varchar" MaxLength="4000" />
+    <Property Name="Status_ID" Type="int" />
+    <Property Name="Status_Desc" Type="varchar" MaxLength="4000" />
+    <Property Name="Departure_Time" Type="datetime" Nullable="false" />
+    <Property Name="Company_ID" Type="int" />
+    <Property Name="Arrival_Time" Type="datetime" />
+    <Property Name="Boarding_Time" Type="datetime" />
+    <Property Name="Schedule_Desc" Type="varchar" MaxLength="4043" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'Bus_Ticketing_System.dbo.View_Stage_Booking' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="View_Stage_Booking">
+    <Key>
+      <PropertyRef Name="Ticket_No" />
+      <PropertyRef Name="Departure_Time" />
+      <PropertyRef Name="Bus_ID" />
+      <PropertyRef Name="Route_ID" />
+      <PropertyRef Name="Status_ID" />
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="Ticket_No" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="Schedule_ID" Type="int" />
+    <Property Name="Departure_Time" Type="datetime" Nullable="false" />
+    <Property Name="Arrival_Time" Type="datetime" />
+    <Property Name="Bus_ID" Type="int" Nullable="false" />
+    <Property Name="Plate_No" Type="varchar" MaxLength="4000" />
+    <Property Name="Seat_No" Type="int" />
+    <Property Name="Route_ID" Type="int" Nullable="false" />
+    <Property Name="Route_Name" Type="varchar" MaxLength="2000" />
+    <Property Name="Start_Stage" Type="varchar" MaxLength="2000" />
+    <Property Name="Destination_Stage" Type="varchar" MaxLength="2000" />
+    <Property Name="Status_ID" Type="int" Nullable="false" />
+    <Property Name="Status_Desc" Type="varchar" MaxLength="4000" />
+    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="Companies_Name" Type="nvarchar(max)" />
+    <Property Name="Location" Type="nvarchar(max)" />
+    <Property Name="CountryCode" Type="nchar" MaxLength="10" />
+    <Property Name="Driver_ID" Type="int" />
+    <Property Name="Employees_Name" Type="varchar" MaxLength="4000" />
+    <Property Name="Email" Type="varchar" MaxLength="4000" />
+    <Property Name="Phone" Type="varchar" MaxLength="1000" />
+    <Property Name="Gender" Type="nchar" MaxLength="2" />
+    <Property Name="Gender_Desc" Type="nchar" MaxLength="20" />
+    <Property Name="Nationality" Type="nchar" MaxLength="10" />
+    <Property Name="CountryName" Type="nvarchar" MaxLength="150" />
+    <Property Name="Boarding_Time" Type="datetime" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'Bus_Ticketing_System.dbo.View_Stage_Booking_Final' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="View_Stage_Booking_Final">
+    <Key>
+      <PropertyRef Name="Departure_Time" />
+      <PropertyRef Name="Booking_Status" />
+    </Key>
+    <Property Name="Schedule_ID" Type="int" />
+    <Property Name="Departure_Time" Type="datetime" Nullable="false" />
+    <Property Name="Arrival_Time" Type="datetime" />
+    <Property Name="Seat_No" Type="int" />
+    <Property Name="Plate_No" Type="varchar" MaxLength="4000" />
+    <Property Name="Route_Name" Type="varchar" MaxLength="2000" />
+    <Property Name="Start_Stage" Type="varchar" MaxLength="2000" />
+    <Property Name="Destination_Stage" Type="varchar" MaxLength="2000" />
+    <Property Name="Boarding_Time" Type="datetime" />
+    <Property Name="Booked_seats" Type="int" />
+    <Property Name="Remaining_Seats" Type="int" />
+    <Property Name="Booking_Status" Type="varchar" MaxLength="10" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'Bus_Ticketing_System.dbo.View_Users' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="View_Users">
+    <Key>
+      <PropertyRef Name="UserId" />
+      <PropertyRef Name="UserName" />
+      <PropertyRef Name="RoleId" />
+      <PropertyRef Name="Role_Desc" />
+    </Key>
+    <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="Email" Type="nvarchar" MaxLength="256" />
+    <Property Name="PhoneNumber" Type="nvarchar(max)" />
+    <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
+    <Property Name="Bus_Id" Type="int" />
+    <Property Name="Company_Id" Type="int" />
+    <Property Name="RoleId" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="Role_Desc" Type="nvarchar" MaxLength="256" Nullable="false" />
+    <Property Name="Company_Name" Type="nvarchar(max)" />
+    <Property Name="CountryCode" Type="nchar" MaxLength="10" />
+  </EntityType>
+  <Association Name="FK_A_Buses_A_Companies">
+    <End Role="A_Companies" Type="Self.A_Companies" Multiplicity="0..1" />
+    <End Role="A_Buses" Type="Self.A_Buses" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="A_Companies">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="A_Buses">
+        <PropertyRef Name="Company" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_A_Buses_A_Employees">
+    <End Role="A_Employees" Type="Self.A_Employees" Multiplicity="0..1" />
+    <End Role="A_Buses" Type="Self.A_Buses" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="A_Employees">
+        <PropertyRef Name="Employee_ID" />
+      </Principal>
+      <Dependent Role="A_Buses">
+        <PropertyRef Name="Driver_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_A_Buses_A_Manufacturer">
+    <End Role="A_Manufacturer" Type="Self.A_Manufacturer" Multiplicity="0..1" />
+    <End Role="A_Buses" Type="Self.A_Buses" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="A_Manufacturer">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="A_Buses">
+        <PropertyRef Name="Manufacturer" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_A_Buses_A_Routes">
+    <End Role="A_Routes" Type="Self.A_Routes" Multiplicity="0..1" />
+    <End Role="A_Buses" Type="Self.A_Buses" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="A_Routes">
+        <PropertyRef Name="Route_ID" />
+      </Principal>
+      <Dependent Role="A_Buses">
+        <PropertyRef Name="Route_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_A_Companies_A_Country">
+    <End Role="A_Country" Type="Self.A_Country" Multiplicity="0..1" />
+    <End Role="A_Companies" Type="Self.A_Companies" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="A_Country">
+        <PropertyRef Name="CountryCode" />
+      </Principal>
+      <Dependent Role="A_Companies">
+        <PropertyRef Name="CountryCode" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_A_Customer_A_Country">
+    <End Role="A_Country" Type="Self.A_Country" Multiplicity="0..1" />
+    <End Role="A_Customer" Type="Self.A_Customer" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="A_Country">
+        <PropertyRef Name="CountryCode" />
+      </Principal>
+      <Dependent Role="A_Customer">
+        <PropertyRef Name="Nationality" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_A_Customer_A_Gender">
+    <End Role="A_Gender" Type="Self.A_Gender" Multiplicity="0..1" />
+    <End Role="A_Customer" Type="Self.A_Customer" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="A_Gender">
+        <PropertyRef Name="Gender_Code" />
+      </Principal>
+      <Dependent Role="A_Customer">
+        <PropertyRef Name="Gender" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_A_Employees_A_Companies">
+    <End Role="A_Companies" Type="Self.A_Companies" Multiplicity="0..1" />
+    <End Role="A_Employees" Type="Self.A_Employees" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="A_Companies">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="A_Employees">
+        <PropertyRef Name="Company" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_A_Employees_A_Country">
+    <End Role="A_Country" Type="Self.A_Country" Multiplicity="0..1" />
+    <End Role="A_Employees" Type="Self.A_Employees" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="A_Country">
+        <PropertyRef Name="CountryCode" />
+      </Principal>
+      <Dependent Role="A_Employees">
+        <PropertyRef Name="Nationality" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_A_Employees_A_Gender">
+    <End Role="A_Gender" Type="Self.A_Gender" Multiplicity="0..1" />
+    <End Role="A_Employees" Type="Self.A_Employees" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="A_Gender">
+        <PropertyRef Name="Gender_Code" />
+      </Principal>
+      <Dependent Role="A_Employees">
+        <PropertyRef Name="Gender" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_A_Employees_A_Personel_Titles">
+    <End Role="A_Personel_Titles" Type="Self.A_Personel_Titles" Multiplicity="0..1" />
+    <End Role="A_Employees" Type="Self.A_Employees" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="A_Personel_Titles">
+        <PropertyRef Name="Title_ID" />
+      </Principal>
+      <Dependent Role="A_Employees">
+        <PropertyRef Name="Title" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_A_Level_Of_Education_A_Level_Of_Education">
+    <End Role="A_Level_Of_Education" Type="Self.A_Level_Of_Education" Multiplicity="1" />
+    <End Role="A_Level_Of_Education1" Type="Self.A_Level_Of_Education" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="A_Level_Of_Education">
+        <PropertyRef Name="LevelID" />
+      </Principal>
+      <Dependent Role="A_Level_Of_Education1">
+        <PropertyRef Name="LevelID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_A_Routes_A_Companies">
+    <End Role="A_Companies" Type="Self.A_Companies" Multiplicity="0..1" />
+    <End Role="A_Routes" Type="Self.A_Routes" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="A_Companies">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="A_Routes">
+        <PropertyRef Name="Company" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_A_Ticketing_A_Customer">
+    <End Role="A_Customer" Type="Self.A_Customer" Multiplicity="0..1" />
+    <End Role="Online_Ticketing" Type="Self.Online_Ticketing" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="A_Customer">
+        <PropertyRef Name="Customer_ID" />
+      </Principal>
+      <Dependent Role="Online_Ticketing">
+        <PropertyRef Name="Customer_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_A_Ticketing_Bus_Scheduling">
+    <End Role="Bus_Scheduling" Type="Self.Bus_Scheduling" Multiplicity="0..1" />
+    <End Role="Online_Ticketing" Type="Self.Online_Ticketing" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Bus_Scheduling">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Online_Ticketing">
+        <PropertyRef Name="Schedule_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Bus_Scheduling_A_Buses">
+    <End Role="A_Buses" Type="Self.A_Buses" Multiplicity="1" />
+    <End Role="Bus_Scheduling" Type="Self.Bus_Scheduling" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="A_Buses">
+        <PropertyRef Name="Bus_ID" />
+      </Principal>
+      <Dependent Role="Bus_Scheduling">
+        <PropertyRef Name="Bus_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Bus_Scheduling_A_Companies">
+    <End Role="A_Companies" Type="Self.A_Companies" Multiplicity="0..1" />
+    <End Role="Bus_Scheduling" Type="Self.Bus_Scheduling" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="A_Companies">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Bus_Scheduling">
+        <PropertyRef Name="Company_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Bus_Scheduling_A_Schedule_Status">
+    <End Role="A_Schedule_Status" Type="Self.A_Schedule_Status" Multiplicity="0..1" />
+    <End Role="Bus_Scheduling" Type="Self.Bus_Scheduling" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="A_Schedule_Status">
+        <PropertyRef Name="Status_ID" />
+      </Principal>
+      <Dependent Role="Bus_Scheduling">
+        <PropertyRef Name="Status_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Customer_Booking_A_Customer">
+    <End Role="A_Customer" Type="Self.A_Customer" Multiplicity="0..1" />
+    <End Role="Customer_Booking" Type="Self.Customer_Booking" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="A_Customer">
+        <PropertyRef Name="Customer_ID" />
+      </Principal>
+      <Dependent Role="Customer_Booking">
+        <PropertyRef Name="Customer_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Customer_Booking_Bus_Scheduling">
+    <End Role="Bus_Scheduling" Type="Self.Bus_Scheduling" Multiplicity="0..1" />
+    <End Role="Customer_Booking" Type="Self.Customer_Booking" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Bus_Scheduling">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Customer_Booking">
+        <PropertyRef Name="Schedule_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CustomerNOK_A_Contact_Type">
+    <End Role="A_Contact_Type" Type="Self.A_Contact_Type" Multiplicity="0..1" />
+    <End Role="CustomerNOK" Type="Self.CustomerNOK" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="A_Contact_Type">
+        <PropertyRef Name="ContactID" />
+      </Principal>
+      <Dependent Role="CustomerNOK">
+        <PropertyRef Name="ContactType" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CustomerNOK_A_Customer">
+    <End Role="A_Customer" Type="Self.A_Customer" Multiplicity="0..1" />
+    <End Role="CustomerNOK" Type="Self.CustomerNOK" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="A_Customer">
+        <PropertyRef Name="Customer_ID" />
+      </Principal>
+      <Dependent Role="CustomerNOK">
+        <PropertyRef Name="Customer_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CustomerNOK_A_Gender">
+    <End Role="A_Gender" Type="Self.A_Gender" Multiplicity="0..1" />
+    <End Role="CustomerNOK" Type="Self.CustomerNOK" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="A_Gender">
+        <PropertyRef Name="Gender_Code" />
+      </Principal>
+      <Dependent Role="CustomerNOK">
+        <PropertyRef Name="Gender" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Education_A_Employees">
+    <End Role="A_Employees" Type="Self.A_Employees" Multiplicity="0..1" />
+    <End Role="Education" Type="Self.Education" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="A_Employees">
+        <PropertyRef Name="Employee_ID" />
+      </Principal>
+      <Dependent Role="Education">
+        <PropertyRef Name="EmployeeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Education_A_Level_Of_Education">
+    <End Role="A_Level_Of_Education" Type="Self.A_Level_Of_Education" Multiplicity="0..1" />
+    <End Role="Education" Type="Self.Education" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="A_Level_Of_Education">
+        <PropertyRef Name="LevelID" />
+      </Principal>
+      <Dependent Role="Education">
+        <PropertyRef Name="Level_Of_Education" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Employee_NOK_A_Contact_Type">
+    <End Role="A_Contact_Type" Type="Self.A_Contact_Type" Multiplicity="0..1" />
+    <End Role="Employee_NOK" Type="Self.Employee_NOK" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="A_Contact_Type">
+        <PropertyRef Name="ContactID" />
+      </Principal>
+      <Dependent Role="Employee_NOK">
+        <PropertyRef Name="ContactType" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Employee_NOK_A_Employees">
+    <End Role="A_Employees" Type="Self.A_Employees" Multiplicity="0..1" />
+    <End Role="Employee_NOK" Type="Self.Employee_NOK" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="A_Employees">
+        <PropertyRef Name="Employee_ID" />
+      </Principal>
+      <Dependent Role="Employee_NOK">
+        <PropertyRef Name="Employee_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Employee_NOK_A_Gender">
+    <End Role="A_Gender" Type="Self.A_Gender" Multiplicity="0..1" />
+    <End Role="Employee_NOK" Type="Self.Employee_NOK" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="A_Gender">
+        <PropertyRef Name="Gender_Code" />
+      </Principal>
+      <Dependent Role="Employee_NOK">
+        <PropertyRef Name="Gender" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Stage_Ticketing_Bus_Scheduling">
+    <End Role="Bus_Scheduling" Type="Self.Bus_Scheduling" Multiplicity="0..1" />
+    <End Role="Stage_Ticketing" Type="Self.Stage_Ticketing" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Bus_Scheduling">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Stage_Ticketing">
+        <PropertyRef Name="Schedule_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="Bus_Ticketing_SystemModelStoreContainer">
+    <EntitySet Name="A_Buses" EntityType="Self.A_Buses" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="A_Companies" EntityType="Self.A_Companies" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="A_Contact_Type" EntityType="Self.A_Contact_Type" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="A_Country" EntityType="Self.A_Country" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="A_Customer" EntityType="Self.A_Customer" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="A_Employees" EntityType="Self.A_Employees" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="A_Gender" EntityType="Self.A_Gender" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="A_Level_Of_Education" EntityType="Self.A_Level_Of_Education" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="A_Manufacturer" EntityType="Self.A_Manufacturer" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="A_Personel_Titles" EntityType="Self.A_Personel_Titles" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="A_Routes" EntityType="Self.A_Routes" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="A_Schedule_Status" EntityType="Self.A_Schedule_Status" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Bus_Scheduling" EntityType="Self.Bus_Scheduling" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Customer_Booking" EntityType="Self.Customer_Booking" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CustomerNOK" EntityType="Self.CustomerNOK" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Education" EntityType="Self.Education" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Employee_NOK" EntityType="Self.Employee_NOK" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Online_Ticketing" EntityType="Self.Online_Ticketing" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Stage_Ticketing" EntityType="Self.Stage_Ticketing" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="View_Employee_Education" EntityType="Self.View_Employee_Education" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [View_Employee_Education].[Id] AS [Id], 
+    [View_Employee_Education].[EmployeeID] AS [EmployeeID], 
+    [View_Employee_Education].[Name] AS [Name], 
+    [View_Employee_Education].[Level_Of_Education] AS [Level_Of_Education], 
+    [View_Employee_Education].[Grade] AS [Grade], 
+    [View_Employee_Education].[School] AS [School], 
+    [View_Employee_Education].[Start_Year] AS [Start_Year], 
+    [View_Employee_Education].[End_Year] AS [End_Year]
+    FROM [dbo].[View_Employee_Education] AS [View_Employee_Education]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="View_Scheduling" EntityType="Self.View_Scheduling" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [View_Scheduling].[ID] AS [ID], 
+    [View_Scheduling].[Bus_ID] AS [Bus_ID], 
+    [View_Scheduling].[Plate_No] AS [Plate_No], 
+    [View_Scheduling].[Status_ID] AS [Status_ID], 
+    [View_Scheduling].[Status_Desc] AS [Status_Desc], 
+    [View_Scheduling].[Departure_Time] AS [Departure_Time], 
+    [View_Scheduling].[Company_ID] AS [Company_ID], 
+    [View_Scheduling].[Arrival_Time] AS [Arrival_Time], 
+    [View_Scheduling].[Boarding_Time] AS [Boarding_Time], 
+    [View_Scheduling].[Schedule_Desc] AS [Schedule_Desc]
+    FROM [dbo].[View_Scheduling] AS [View_Scheduling]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="View_Stage_Booking" EntityType="Self.View_Stage_Booking" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [View_Stage_Booking].[Ticket_No] AS [Ticket_No], 
+    [View_Stage_Booking].[Schedule_ID] AS [Schedule_ID], 
+    [View_Stage_Booking].[Departure_Time] AS [Departure_Time], 
+    [View_Stage_Booking].[Arrival_Time] AS [Arrival_Time], 
+    [View_Stage_Booking].[Bus_ID] AS [Bus_ID], 
+    [View_Stage_Booking].[Plate_No] AS [Plate_No], 
+    [View_Stage_Booking].[Seat_No] AS [Seat_No], 
+    [View_Stage_Booking].[Route_ID] AS [Route_ID], 
+    [View_Stage_Booking].[Route_Name] AS [Route_Name], 
+    [View_Stage_Booking].[Start_Stage] AS [Start_Stage], 
+    [View_Stage_Booking].[Destination_Stage] AS [Destination_Stage], 
+    [View_Stage_Booking].[Status_ID] AS [Status_ID], 
+    [View_Stage_Booking].[Status_Desc] AS [Status_Desc], 
+    [View_Stage_Booking].[ID] AS [ID], 
+    [View_Stage_Booking].[Companies_Name] AS [Companies_Name], 
+    [View_Stage_Booking].[Location] AS [Location], 
+    [View_Stage_Booking].[CountryCode] AS [CountryCode], 
+    [View_Stage_Booking].[Driver_ID] AS [Driver_ID], 
+    [View_Stage_Booking].[Employees_Name] AS [Employees_Name], 
+    [View_Stage_Booking].[Email] AS [Email], 
+    [View_Stage_Booking].[Phone] AS [Phone], 
+    [View_Stage_Booking].[Gender] AS [Gender], 
+    [View_Stage_Booking].[Gender_Desc] AS [Gender_Desc], 
+    [View_Stage_Booking].[Nationality] AS [Nationality], 
+    [View_Stage_Booking].[CountryName] AS [CountryName], 
+    [View_Stage_Booking].[Boarding_Time] AS [Boarding_Time]
+    FROM [dbo].[View_Stage_Booking] AS [View_Stage_Booking]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="View_Stage_Booking_Final" EntityType="Self.View_Stage_Booking_Final" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [View_Stage_Booking_Final].[Schedule_ID] AS [Schedule_ID], 
+    [View_Stage_Booking_Final].[Departure_Time] AS [Departure_Time], 
+    [View_Stage_Booking_Final].[Arrival_Time] AS [Arrival_Time], 
+    [View_Stage_Booking_Final].[Seat_No] AS [Seat_No], 
+    [View_Stage_Booking_Final].[Plate_No] AS [Plate_No], 
+    [View_Stage_Booking_Final].[Route_Name] AS [Route_Name], 
+    [View_Stage_Booking_Final].[Start_Stage] AS [Start_Stage], 
+    [View_Stage_Booking_Final].[Destination_Stage] AS [Destination_Stage], 
+    [View_Stage_Booking_Final].[Boarding_Time] AS [Boarding_Time], 
+    [View_Stage_Booking_Final].[Booked_seats] AS [Booked_seats], 
+    [View_Stage_Booking_Final].[Remaining_Seats] AS [Remaining_Seats], 
+    [View_Stage_Booking_Final].[Booking_Status] AS [Booking_Status]
+    FROM [dbo].[View_Stage_Booking_Final] AS [View_Stage_Booking_Final]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="View_Users" EntityType="Self.View_Users" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [View_Users].[UserId] AS [UserId], 
+    [View_Users].[Email] AS [Email], 
+    [View_Users].[PhoneNumber] AS [PhoneNumber], 
+    [View_Users].[UserName] AS [UserName], 
+    [View_Users].[Bus_Id] AS [Bus_Id], 
+    [View_Users].[Company_Id] AS [Company_Id], 
+    [View_Users].[RoleId] AS [RoleId], 
+    [View_Users].[Role_Desc] AS [Role_Desc], 
+    [View_Users].[Company_Name] AS [Company_Name], 
+    [View_Users].[CountryCode] AS [CountryCode]
+    FROM [dbo].[View_Users] AS [View_Users]</DefiningQuery>
+    </EntitySet>
+    <AssociationSet Name="FK_A_Buses_A_Companies" Association="Self.FK_A_Buses_A_Companies">
+      <End Role="A_Companies" EntitySet="A_Companies" />
+      <End Role="A_Buses" EntitySet="A_Buses" />
+    </AssociationSet>
+    <AssociationSet Name="FK_A_Buses_A_Employees" Association="Self.FK_A_Buses_A_Employees">
+      <End Role="A_Employees" EntitySet="A_Employees" />
+      <End Role="A_Buses" EntitySet="A_Buses" />
+    </AssociationSet>
+    <AssociationSet Name="FK_A_Buses_A_Manufacturer" Association="Self.FK_A_Buses_A_Manufacturer">
+      <End Role="A_Manufacturer" EntitySet="A_Manufacturer" />
+      <End Role="A_Buses" EntitySet="A_Buses" />
+    </AssociationSet>
+    <AssociationSet Name="FK_A_Buses_A_Routes" Association="Self.FK_A_Buses_A_Routes">
+      <End Role="A_Routes" EntitySet="A_Routes" />
+      <End Role="A_Buses" EntitySet="A_Buses" />
+    </AssociationSet>
+    <AssociationSet Name="FK_A_Companies_A_Country" Association="Self.FK_A_Companies_A_Country">
+      <End Role="A_Country" EntitySet="A_Country" />
+      <End Role="A_Companies" EntitySet="A_Companies" />
+    </AssociationSet>
+    <AssociationSet Name="FK_A_Customer_A_Country" Association="Self.FK_A_Customer_A_Country">
+      <End Role="A_Country" EntitySet="A_Country" />
+      <End Role="A_Customer" EntitySet="A_Customer" />
+    </AssociationSet>
+    <AssociationSet Name="FK_A_Customer_A_Gender" Association="Self.FK_A_Customer_A_Gender">
+      <End Role="A_Gender" EntitySet="A_Gender" />
+      <End Role="A_Customer" EntitySet="A_Customer" />
+    </AssociationSet>
+    <AssociationSet Name="FK_A_Employees_A_Companies" Association="Self.FK_A_Employees_A_Companies">
+      <End Role="A_Companies" EntitySet="A_Companies" />
+      <End Role="A_Employees" EntitySet="A_Employees" />
+    </AssociationSet>
+    <AssociationSet Name="FK_A_Employees_A_Country" Association="Self.FK_A_Employees_A_Country">
+      <End Role="A_Country" EntitySet="A_Country" />
+      <End Role="A_Employees" EntitySet="A_Employees" />
+    </AssociationSet>
+    <AssociationSet Name="FK_A_Employees_A_Gender" Association="Self.FK_A_Employees_A_Gender">
+      <End Role="A_Gender" EntitySet="A_Gender" />
+      <End Role="A_Employees" EntitySet="A_Employees" />
+    </AssociationSet>
+    <AssociationSet Name="FK_A_Employees_A_Personel_Titles" Association="Self.FK_A_Employees_A_Personel_Titles">
+      <End Role="A_Personel_Titles" EntitySet="A_Personel_Titles" />
+      <End Role="A_Employees" EntitySet="A_Employees" />
+    </AssociationSet>
+    <AssociationSet Name="FK_A_Level_Of_Education_A_Level_Of_Education" Association="Self.FK_A_Level_Of_Education_A_Level_Of_Education">
+      <End Role="A_Level_Of_Education" EntitySet="A_Level_Of_Education" />
+      <End Role="A_Level_Of_Education1" EntitySet="A_Level_Of_Education" />
+    </AssociationSet>
+    <AssociationSet Name="FK_A_Routes_A_Companies" Association="Self.FK_A_Routes_A_Companies">
+      <End Role="A_Companies" EntitySet="A_Companies" />
+      <End Role="A_Routes" EntitySet="A_Routes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_A_Ticketing_A_Customer" Association="Self.FK_A_Ticketing_A_Customer">
+      <End Role="A_Customer" EntitySet="A_Customer" />
+      <End Role="Online_Ticketing" EntitySet="Online_Ticketing" />
+    </AssociationSet>
+    <AssociationSet Name="FK_A_Ticketing_Bus_Scheduling" Association="Self.FK_A_Ticketing_Bus_Scheduling">
+      <End Role="Bus_Scheduling" EntitySet="Bus_Scheduling" />
+      <End Role="Online_Ticketing" EntitySet="Online_Ticketing" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Bus_Scheduling_A_Buses" Association="Self.FK_Bus_Scheduling_A_Buses">
+      <End Role="A_Buses" EntitySet="A_Buses" />
+      <End Role="Bus_Scheduling" EntitySet="Bus_Scheduling" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Bus_Scheduling_A_Companies" Association="Self.FK_Bus_Scheduling_A_Companies">
+      <End Role="A_Companies" EntitySet="A_Companies" />
+      <End Role="Bus_Scheduling" EntitySet="Bus_Scheduling" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Bus_Scheduling_A_Schedule_Status" Association="Self.FK_Bus_Scheduling_A_Schedule_Status">
+      <End Role="A_Schedule_Status" EntitySet="A_Schedule_Status" />
+      <End Role="Bus_Scheduling" EntitySet="Bus_Scheduling" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Customer_Booking_A_Customer" Association="Self.FK_Customer_Booking_A_Customer">
+      <End Role="A_Customer" EntitySet="A_Customer" />
+      <End Role="Customer_Booking" EntitySet="Customer_Booking" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Customer_Booking_Bus_Scheduling" Association="Self.FK_Customer_Booking_Bus_Scheduling">
+      <End Role="Bus_Scheduling" EntitySet="Bus_Scheduling" />
+      <End Role="Customer_Booking" EntitySet="Customer_Booking" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CustomerNOK_A_Contact_Type" Association="Self.FK_CustomerNOK_A_Contact_Type">
+      <End Role="A_Contact_Type" EntitySet="A_Contact_Type" />
+      <End Role="CustomerNOK" EntitySet="CustomerNOK" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CustomerNOK_A_Customer" Association="Self.FK_CustomerNOK_A_Customer">
+      <End Role="A_Customer" EntitySet="A_Customer" />
+      <End Role="CustomerNOK" EntitySet="CustomerNOK" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CustomerNOK_A_Gender" Association="Self.FK_CustomerNOK_A_Gender">
+      <End Role="A_Gender" EntitySet="A_Gender" />
+      <End Role="CustomerNOK" EntitySet="CustomerNOK" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Education_A_Employees" Association="Self.FK_Education_A_Employees">
+      <End Role="A_Employees" EntitySet="A_Employees" />
+      <End Role="Education" EntitySet="Education" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Education_A_Level_Of_Education" Association="Self.FK_Education_A_Level_Of_Education">
+      <End Role="A_Level_Of_Education" EntitySet="A_Level_Of_Education" />
+      <End Role="Education" EntitySet="Education" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Employee_NOK_A_Contact_Type" Association="Self.FK_Employee_NOK_A_Contact_Type">
+      <End Role="A_Contact_Type" EntitySet="A_Contact_Type" />
+      <End Role="Employee_NOK" EntitySet="Employee_NOK" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Employee_NOK_A_Employees" Association="Self.FK_Employee_NOK_A_Employees">
+      <End Role="A_Employees" EntitySet="A_Employees" />
+      <End Role="Employee_NOK" EntitySet="Employee_NOK" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Employee_NOK_A_Gender" Association="Self.FK_Employee_NOK_A_Gender">
+      <End Role="A_Gender" EntitySet="A_Gender" />
+      <End Role="Employee_NOK" EntitySet="Employee_NOK" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Stage_Ticketing_Bus_Scheduling" Association="Self.FK_Stage_Ticketing_Bus_Scheduling">
+      <End Role="Bus_Scheduling" EntitySet="Bus_Scheduling" />
+      <End Role="Stage_Ticketing" EntitySet="Stage_Ticketing" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

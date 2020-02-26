@@ -1,0 +1,130 @@
+﻿@{
+    ViewBag.Title = "Routes";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<ol class="breadcrumb" style="margin-top:30px;">
+    <li class="breadcrumb-item">
+        <a href="/Dashboard/LMISDashboard">Dashboard</a>
+    </li>
+    <li class="breadcrumb-item active">Routes</li>
+</ol>
+
+@(Html.EJ().Grid<object>("Grid")
+                    .Datasource(datasource => datasource.URL("GetRoutes").InsertURL("RoutesInsert").UpdateURL("RoutesUpdate").Adaptor(AdaptorType.UrlAdaptor))
+                    .ShowColumnChooser()
+                    .ToolbarSettings(toolBar => toolBar.ShowToolbar().ToolbarItems(items =>
+                    {
+                        items.AddTool(ToolBarItems.Add);
+                        items.AddTool(ToolBarItems.Edit);
+                        items.AddTool(ToolBarItems.Delete);
+            //items.AddTool(ToolBarItems.Update);
+            items.AddTool(ToolBarItems.Cancel);
+                        items.AddTool(ToolBarItems.Search);
+                        items.AddTool(ToolBarItems.ExcelExport);
+                    }))
+                    .AllowSearching().SearchSettings(search =>
+                    {
+                        search.Fields(fields =>
+                        {
+
+                        });
+                        search.Operator(Operator.Contains);
+                        search.IgnoreCase(true);
+                    })
+                        .EditSettings(edit => { edit.AllowAdding().AllowDeleting().AllowEditing().EditMode(EditMode.DialogTemplate).DialogEditorTemplateID("#template"); })
+                     .TextWrapSettings(wrap => { wrap.WrapMode(WrapMode.Both); })
+                    .AllowSorting().AllowFiltering().ShowColumnChooser().AllowGrouping().AllowTextWrap().AllowPaging().PageSettings(page => page.PageSize(100)).IsResponsive().AllowResizeToFit()
+                    .AllowScrolling().ScrollSettings(scroll => { scroll.Width("100%"); }).FilterSettings(filter => { filter.FilterType(FilterType.Excel); })
+                    .Columns(col =>
+
+                    {
+                        col.Field("Route_ID").HeaderText("Route ID").IsPrimaryKey(true).TextAlign(TextAlign.Left).Width("80").AllowEditing().Add();
+
+                        col.Field("Route_Name").HeaderText("Route Name").TextAlign(TextAlign.Left).Priority(4).Width("140").AllowEditing().Add();
+
+                        col.Field("Start_Stage").HeaderText("Start stage").TextAlign(TextAlign.Left).Priority(4).Width("140").AllowEditing().Add();
+
+                        col.Field("Destination_Stage").HeaderText("Destination Stage").Width("100").AllowEditing(false).Add();
+
+                        col.Field("Company").HeaderText("Company").TextAlign(TextAlign.Left).Width("200").AllowEditing().ForeignKeyField("ID").ForeignKeyValue("Name").DataSource((IEnumerable<object>)ViewBag.Company).Add();
+
+                        col.Field("Route_Description").HeaderText("Route Description").AllowFiltering(false).Width("200").AllowEditing().Add();
+
+                    }).ClientSideEvents(evt => evt.ToolbarClick("OnToolbarClick9").Create("create").ActionComplete("edit")))
+
+<script type="text/template" id="template" @*style="width: 100%"*@>
+    <div style="width:1400px"></div>
+    <div id="defaultTab" style="width: 100%;">
+        <div id="tab1">
+            <table style="width:100%;" @*id="table2" border="1" cellpadding="3" cellspacing="0" border-collapse="none"*@>
+                <tr>
+                    <td style="text-align:left; width:10%;">Route ID</td>
+                    <td style="text-align: left"> <input type="text" id="Route_ID" style="min-width:70%;" readonly="readonly" name="Route_ID" value="{{:Route_ID}}" class="form-control" /> </td>
+                </tr>
+                <tr>
+                    <td style="text-align: left;">Route Name</td>
+                    <td style="text-align: left"> <input style="min-width:70%;" type="text" id="Route_Name" name="Route_Name" value="{{:Route_Name}}" class="form-control" /> </td>
+                </tr>
+                <tr>
+                    <td style="text-align: left; width:10%;" id="ReceiivedDate">Start Stage</td>
+                    <td style="text-align: left;  width:50%;"> <input type="text" style="min-width:70%;" id="Start_Stage" name="Start_Stage" value="{{:Start_Stage}}" class="form-control" /></td>
+                </tr>
+                <tr>
+                    <td style="text-align: left;">Destination Stage</td>
+                    <td style="text-align: left"> <input type="text" style="min-width:70%;" id="Destination_Stage" name="Destination_Stage" value="{{:Destination_Stage}}" class="form-control" /> </td>
+                </tr>
+                <tr>
+                    <td style="text-align: left;">Company</td>
+                    <td style="text-align: left"> <input style="min-width:70%;" id="Company" name="Company" value="{{:Company}}" class="form-control" /> </td>
+                </tr>
+                <tr>
+                    <td style="text-align: left;">Description</td>
+                    <td style="text-align: left"> <textarea style="min-width:70%;" cols="5" rows="5" type="text" id="Route_Description" name="Route_Description" value="{{:Route_Description}}" class="form-control ">{{:Route_Description}}</textarea> </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</script>
+
+<script>
+    function edit(args) {
+        if (args.requestType == "beginedit" || args.requestType == "add") {
+            window.requestType = args.requestType;
+            $($("#EditDialog_Grid_Save").hide()).after('<button id="save" type="button" onclick="savess();" class="btn btn-success btn-sm" > <span class="glyphicon glyphicon-save"></span> Save Route</button>');
+            $("#save").css({ "width": "200px", "height": "50px", "font-size": "17px", "float": "right", "margin-left": "10px", "margin-top": "20px", "margin-bottom": "10px" });
+            $("#EditDialog_Grid_Cancel").ejButton("destroy");
+            $($("#EditDialog_Grid_Cancel").hide()).after(' <button type="button" id="cancel" onclick="cancelss()" class="btn btn-danger btn-sm" ><span class="glyphicon glyphicon-remove-circle"></span> Cancel</button>');
+            $("#cancel").css({ "width": "100px", "height": "50px", "float": "right", "margin-left": "10px", "margin-top": "20px", "margin-bottom": "10px" });
+            $("#Grid_dialogEdit_closebutton").hide();
+            var objDialog = $("#Grid").data("ejGrid");
+            $("#" + objDialog._id + "_dialogEdit").ejDialog({ open: "open" });
+            $('#Company').ejDropDownList({
+
+                dataSource: @Html.Raw(Json.Encode(ViewBag.Company)),
+                enabled: true,
+                width: "70%",
+               // change: "setCommunicated_Lev3",
+                fields: { value: "ID", text: "Name" },
+            }).data("ejDropDownList");
+
+        }
+    }
+    function open(args) {
+
+        var objDialog = $("#Grid").data("ejGrid");
+        var $dialogWrapper = objDialog.element.find("#" + objDialog._id + "_dialogEdit_wrapper");
+        $dialogWrapper.css("top", "10px");
+        $dialogWrapper.css("left", "0px");
+        $dialogWrapper.css("right", "0px");
+    }
+    function savess(args) {
+        var obj = $("#Grid").ejGrid("instance");
+        obj.endEdit();
+        obj.refreshContent();
+    }
+    function cancelss(args) {
+        var obj = $("#Grid").ejGrid("instance")
+        obj.cancelEdit();
+    }
+</script>

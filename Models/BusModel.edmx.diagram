@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="cf29f1f2a25f4f90a000732b068aae48" Name="Diagram1">
+        <EntityTypeShape EntityType="Bus_Ticketing_SystemModel.A_Buses" Width="1.5" PointX="11.25" PointY="11.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Bus_Ticketing_SystemModel.A_Companies" Width="1.5" PointX="9" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Bus_Ticketing_SystemModel.A_Contact_Type" Width="1.5" PointX="6" PointY="7.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Bus_Ticketing_SystemModel.A_Country" Width="1.5" PointX="0.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Bus_Ticketing_SystemModel.A_Customer" Width="1.5" PointX="3" PointY="11.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Bus_Ticketing_SystemModel.A_Employees" Width="1.5" PointX="6" PointY="10.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Bus_Ticketing_SystemModel.A_Gender" Width="1.5" PointX="0.75" PointY="12.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Bus_Ticketing_SystemModel.A_Level_Of_Education" Width="1.5" PointX="9" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Bus_Ticketing_SystemModel.A_Manufacturer" Width="1.5" PointX="9" PointY="19.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Bus_Ticketing_SystemModel.A_Personel_Titles" Width="1.5" PointX="3.75" PointY="9" IsExpanded="true" />
+        <EntityTypeShape EntityType="Bus_Ticketing_SystemModel.A_Schedule_Status" Width="1.5" PointX="11.25" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Bus_Ticketing_SystemModel.Customer_Booking" Width="1.5" PointX="8.25" PointY="12.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Bus_Ticketing_SystemModel.CustomerNOK" Width="1.5" PointX="8.25" PointY="8" IsExpanded="true" />
+        <EntityTypeShape EntityType="Bus_Ticketing_SystemModel.Employee_NOK" Width="1.5" PointX="11.25" PointY="17" IsExpanded="true" />
+        <EntityTypeShape EntityType="Bus_Ticketing_SystemModel.Online_Ticketing" Width="1.5" PointX="8.25" PointY="15.625" IsExpanded="true" />
+        <AssociationConnector Association="Bus_Ticketing_SystemModel.FK_A_Buses_A_Companies" ManuallyRouted="false" />
+        <AssociationConnector Association="Bus_Ticketing_SystemModel.FK_A_Buses_A_Employees" ManuallyRouted="false" />
+        <AssociationConnector Association="Bus_Ticketing_SystemModel.FK_A_Buses_A_Manufacturer" ManuallyRouted="false" />
+        <AssociationConnector Association="Bus_Ticketing_SystemModel.FK_A_Companies_A_Country" ManuallyRouted="false" />
+        <AssociationConnector Association="Bus_Ticketing_SystemModel.FK_A_Employees_A_Companies" ManuallyRouted="false" />
+        <AssociationConnector Association="Bus_Ticketing_SystemModel.FK_CustomerNOK_A_Contact_Type" ManuallyRouted="false" />
+        <AssociationConnector Association="Bus_Ticketing_SystemModel.FK_Employee_NOK_A_Contact_Type" ManuallyRouted="false" />
+        <AssociationConnector Association="Bus_Ticketing_SystemModel.FK_A_Customer_A_Country" ManuallyRouted="false" />
+        <AssociationConnector Association="Bus_Ticketing_SystemModel.FK_A_Employees_A_Country" ManuallyRouted="false" />
+        <AssociationConnector Association="Bus_Ticketing_SystemModel.FK_A_Customer_A_Gender" ManuallyRouted="false" />
+        <AssociationConnector Association="Bus_Ticketing_SystemModel.FK_A_Ticketing_A_Customer" ManuallyRouted="false" />
+        <AssociationConnector Association="Bus_Ticketing_SystemModel.FK_Customer_Booking_A_Customer" ManuallyRouted="false" />
+        <AssociationConnector Association="Bus_Ticketing_SystemModel.FK_CustomerNOK_A_Customer" ManuallyRouted="false" />
+        <AssociationConnector Association="Bus_Ticketing_SystemModel.FK_A_Employees_A_Gender" ManuallyRouted="false" />
+        <AssociationConnector Association="Bus_Ticketing_SystemModel.FK_A_Employees_A_Personel_Titles" ManuallyRouted="false" />
+        <AssociationConnector Association="Bus_Ticketing_SystemModel.FK_Employee_NOK_A_Employees" ManuallyRouted="false" />
+        <AssociationConnector Association="Bus_Ticketing_SystemModel.FK_CustomerNOK_A_Gender" ManuallyRouted="false" />
+        <AssociationConnector Association="Bus_Ticketing_SystemModel.FK_Employee_NOK_A_Gender" ManuallyRouted="false" />
+        <AssociationConnector Association="Bus_Ticketing_SystemModel.FK_A_Level_Of_Education_A_Level_Of_Education" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="Bus_Ticketing_SystemModel.Education" Width="1.5" PointX="11.625" PointY="7" />
+        <EntityTypeShape EntityType="Bus_Ticketing_SystemModel.View_Employee_Education" Width="1.5" PointX="0.75" PointY="0.75" />
+        <AssociationConnector Association="Bus_Ticketing_SystemModel.FK_Education_A_Employees" />
+        <AssociationConnector Association="Bus_Ticketing_SystemModel.FK_Education_A_Level_Of_Education" />
+        <EntityTypeShape EntityType="Bus_Ticketing_SystemModel.A_Routes" Width="1.5" PointX="11.25" PointY="0.875" />
+        <AssociationConnector Association="Bus_Ticketing_SystemModel.FK_A_Buses_A_Routes" />
+        <AssociationConnector Association="Bus_Ticketing_SystemModel.FK_A_Routes_A_Companies" />
+        <EntityTypeShape EntityType="Bus_Ticketing_SystemModel.Bus_Scheduling" Width="1.5" PointX="14.875" PointY="7" />
+        <AssociationConnector Association="Bus_Ticketing_SystemModel.FK_Bus_Scheduling_A_Buses" />
+        <AssociationConnector Association="Bus_Ticketing_SystemModel.FK_Bus_Scheduling_A_Companies" />
+        <AssociationConnector Association="Bus_Ticketing_SystemModel.FK_Bus_Scheduling_A_Schedule_Status" />
+        <AssociationConnector Association="Bus_Ticketing_SystemModel.FK_A_Ticketing_Bus_Scheduling" />
+        <AssociationConnector Association="Bus_Ticketing_SystemModel.FK_Customer_Booking_Bus_Scheduling" />
+        <EntityTypeShape EntityType="Bus_Ticketing_SystemModel.Stage_Ticketing" Width="1.5" PointX="17.125" PointY="7.375" />
+        <AssociationConnector Association="Bus_Ticketing_SystemModel.FK_Stage_Ticketing_Bus_Scheduling" />
+        <EntityTypeShape EntityType="Bus_Ticketing_SystemModel.View_Scheduling" Width="1.5" PointX="0.75" PointY="4.75" />
+        <EntityTypeShape EntityType="Bus_Ticketing_SystemModel.View_Stage_Booking" Width="1.5" PointX="13.375" PointY="11.75" />
+        <EntityTypeShape EntityType="Bus_Ticketing_SystemModel.View_Stage_Booking_Final" Width="1.5" PointX="3.375" PointY="0.75" />
+        <EntityTypeShape EntityType="Bus_Ticketing_SystemModel.AspNetRole" Width="1.5" PointX="5.375" PointY="0.75" />
+        <EntityTypeShape EntityType="Bus_Ticketing_SystemModel.View_Users" Width="1.5" PointX="5.375" PointY="3.75" />
+        </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

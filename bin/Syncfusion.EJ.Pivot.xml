@@ -1,0 +1,201 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Syncfusion.EJ.Pivot</name>
+    </assembly>
+    <members>
+        <member name="M:Syncfusion.JavaScript.PivotGrid.GetExcelRange(System.Int32,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Gets the Range value of the Excel Column based on the Columns and
+            Row values specified.
+            </summary>
+            <param name="col1">The col1 range</param>
+            <param name="row1">The row1 range</param>
+            <param name="col2">The col2 range</param>
+            <param name="row2">The row2 range</param>
+            <returns>a StringBuilder object</returns>
+        </member>
+        <member name="F:Syncfusion.JavaScript.PivotGrid.Alphabets.A">
+            <summary>
+            Denotes alphabet A
+            </summary>
+        </member>
+        <member name="F:Syncfusion.JavaScript.PivotGrid.Alphabets.B">
+            <summary>
+            Denotes alphabet B
+            </summary>
+        </member>
+        <member name="F:Syncfusion.JavaScript.PivotGrid.Alphabets.C">
+            <summary>
+            Denotes alphabet C
+            </summary>
+        </member>
+        <member name="F:Syncfusion.JavaScript.PivotGrid.Alphabets.D">
+            <summary>
+            Denotes alphabet D
+            </summary>
+        </member>
+        <member name="F:Syncfusion.JavaScript.PivotGrid.Alphabets.E">
+            <summary>
+            Denotes alphabet E
+            </summary>
+        </member>
+        <member name="F:Syncfusion.JavaScript.PivotGrid.Alphabets.F">
+            <summary>
+            Denotes alphabet F
+            </summary>
+        </member>
+        <member name="F:Syncfusion.JavaScript.PivotGrid.Alphabets.G">
+            <summary>
+            Denotes alphabet G
+            </summary>
+        </member>
+        <member name="F:Syncfusion.JavaScript.PivotGrid.Alphabets.H">
+            <summary>
+            Denotes alphabet H
+            </summary>
+        </member>
+        <member name="F:Syncfusion.JavaScript.PivotGrid.Alphabets.I">
+            <summary>
+            Denotes alphabet I
+            </summary>
+        </member>
+        <member name="F:Syncfusion.JavaScript.PivotGrid.Alphabets.J">
+            <summary>
+            Denotes alphabet J
+            </summary>
+        </member>
+        <member name="F:Syncfusion.JavaScript.PivotGrid.Alphabets.K">
+            <summary>
+            Denotes alphabet K
+            </summary>
+        </member>
+        <member name="F:Syncfusion.JavaScript.PivotGrid.Alphabets.L">
+            <summary>
+            Denotes alphabet L
+            </summary>
+        </member>
+        <member name="F:Syncfusion.JavaScript.PivotGrid.Alphabets.M">
+            <summary>
+            Denotes alphabet M
+            </summary>
+        </member>
+        <member name="F:Syncfusion.JavaScript.PivotGrid.Alphabets.N">
+            <summary>
+            Denotes alphabet N
+            </summary>
+        </member>
+        <member name="F:Syncfusion.JavaScript.PivotGrid.Alphabets.O">
+            <summary>
+            Denotes alphabet O
+            </summary>
+        </member>
+        <member name="F:Syncfusion.JavaScript.PivotGrid.Alphabets.P">
+            <summary>
+            Denotes alphabet P
+            </summary>
+        </member>
+        <member name="F:Syncfusion.JavaScript.PivotGrid.Alphabets.Q">
+            <summary>
+            Denotes alphabet Q
+            </summary>
+        </member>
+        <member name="F:Syncfusion.JavaScript.PivotGrid.Alphabets.R">
+            <summary>
+            Denotes alphabet R
+            </summary>
+        </member>
+        <member name="F:Syncfusion.JavaScript.PivotGrid.Alphabets.S">
+            <summary>
+            Denotes alphabet S
+            </summary>
+        </member>
+        <member name="F:Syncfusion.JavaScript.PivotGrid.Alphabets.T">
+            <summary>
+            Denotes alphabet T
+            </summary>
+        </member>
+        <member name="F:Syncfusion.JavaScript.PivotGrid.Alphabets.U">
+            <summary>
+            Denotes alphabet U
+            </summary>
+        </member>
+        <member name="F:Syncfusion.JavaScript.PivotGrid.Alphabets.V">
+            <summary>
+            Denotes alphabet V
+            </summary>
+        </member>
+        <member name="F:Syncfusion.JavaScript.PivotGrid.Alphabets.W">
+            <summary>
+            Denotes alphabet W
+            </summary>
+        </member>
+        <member name="F:Syncfusion.JavaScript.PivotGrid.Alphabets.X">
+            <summary>
+            Denotes alphabet X
+            </summary>
+        </member>
+        <member name="F:Syncfusion.JavaScript.PivotGrid.Alphabets.Y">
+            <summary>
+            Denotes alphabet Y
+            </summary>
+        </member>
+        <member name="F:Syncfusion.JavaScript.PivotGrid.Alphabets.Z">
+            <summary>
+            Denotes alphabet Z
+            </summary>
+        </member>
+        <member name="F:Syncfusion.JavaScript.PivotGrid.KpiCompareResult.less">
+            <summary>
+            Indicates less value.
+            </summary>
+        </member>
+        <member name="F:Syncfusion.JavaScript.PivotGrid.KpiCompareResult.equal">
+            <summary>
+            Indicates equal value.
+            </summary>
+        </member>
+        <member name="F:Syncfusion.JavaScript.PivotGrid.KpiCompareResult.greater">
+            <summary>
+            Indicates greater value.
+            </summary>
+        </member>
+        <member name="T:Syncfusion.JavaScript.ReverseCustomComparer">
+            <summary>
+            Class used for sorting the objects in reverse
+            </summary>
+        </member>
+        <member name="M:Syncfusion.JavaScript.ReverseCustomComparer.#ctor(System.Collections.IComparer)">
+            <summary>
+            Initializes the <see cref="T:Syncfusion.JavaScript.ReverseCustomComparer"/> class.
+            </summary>
+            <param name="comparer">The comparer</param>
+        </member>
+        <member name="M:Syncfusion.JavaScript.ReverseCustomComparer.Compare(System.Object,System.Object)">
+            <summary>
+            Gets the compared result
+            </summary>
+            <param name="x">Object</param>
+            <param name="y">Object</param>
+            <returns>int</returns>
+        </member>
+        <member name="P:Syncfusion.JavaScript.ReverseCustomComparer.CustomComparer">
+            <summary>
+            Gets the custom comparer set before sorting applied
+            </summary>
+        </member>
+        <member name="T:Syncfusion.JavaScript.ReverseOrderComparer">
+            <summary>
+            Class used for sorting the objects in reverse order
+            </summary>
+        </member>
+        <member name="M:Syncfusion.JavaScript.ReverseOrderComparer.Compare(System.Object,System.Object)">
+            <summary>
+            Method to compare two objects
+            </summary>
+            <param name="x">object</param>
+            <param name="y">object</param>
+            <returns>int</returns>
+        </member>
+    </members>
+</doc>

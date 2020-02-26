@@ -1,0 +1,155 @@
+﻿@model Buses.Models.RegisterViewModel
+@{
+    /**/
+
+    ViewBag.Title = "Register";
+}
+<style>
+    .datastyle{
+        min-width:98%;
+    }
+</style>
+<h2>@ViewBag.Title.</h2>
+
+@using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+    <h4>Create a new account.</h4>
+    <hr />
+    @Html.ValidationSummary("", new { @class = "text-danger" })
+    <div class="form-group">
+        @Html.LabelFor(m => m.NameOfAccountHolder, new { @class = "col-md-2 control-label" })
+        <div class="col-md-5">
+            @Html.TextBoxFor(m => m.NameOfAccountHolder, new { @class = "form-control"})
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.UserName, new { @class = "col-md-2 control-label" })
+        <div class="col-md-5">
+            @Html.TextBoxFor(m => m.UserName, new { @class = "form-control datastyle" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
+        <div class="col-md-5">
+            @Html.TextBoxFor(m => m.Email, new { @class = "form-control datastyle" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.PhoneNumber, new { @class = "col-md-2 control-label" })
+        <div class="col-md-5">
+            @Html.TextBoxFor(m => m.PhoneNumber, new { @class = "form-control datastyle" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.UserRole, new { @class = "col-md-2 control-label" })
+        <div class="col-md-5">
+            @Html.TextBoxFor(m => m.UserRole, null, new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Company_Id, new { @class = "col-md-2 control-label" })
+        <div class="col-md-5">
+            @Html.TextBoxFor(m => m.Company_Id, null, new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Bus_Id, new { @class = "col-md-2 control-label" })
+        <div class="col-md-5">
+            @Html.TextBoxFor(m => m.Bus_Id, null, new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
+        <div class="col-md-5">
+            @Html.PasswordFor(m => m.Password, new { @class = "form-control datastyle" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.ConfirmPassword, new { @class = "col-md-2 control-label" })
+        <div class="col-md-5">
+            @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control datastyle" })
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-5">
+            <input type="submit" class="btn btn-default" value="Register" style="float:right;" />
+        </div>
+    </div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+<script>
+    $(function () {
+        $('#NameOfAccountHolder').ejDropDownList({
+                    dataSource: @Html.Raw(Json.Encode(ViewBag.Employees)),
+                    width: "98%",
+                    popupHeight: "500px",
+                    enableFilterSearch: true,
+                    validationRules: {
+                        required: true
+                    },
+                    validationMessage: {
+                        required: "Complaint Category is Required"
+                    },
+            fields: { value: "Employee_ID", text: "Name" },
+                    change: "NameChanged",
+                    readOnly: false
+        }).data("ejDropDownList");
+        $('#UserRole').ejDropDownList({
+                    dataSource: @Html.Raw(Json.Encode(ViewBag.Roles)),
+                    width: "98%",
+                    popupHeight: "500px",
+                    enableFilterSearch: true,
+                    validationRules: {
+                        required: true
+                    },
+                    validationMessage: {
+                        required: "Complaint Category is Required"
+                    },
+            fields: { value: "Name", text: "Name" },
+                    //change: "selectProductQuality",
+                    readOnly: false
+        }).data("ejDropDownList");
+        $('#Company_Id').ejDropDownList({
+                    dataSource: @Html.Raw(Json.Encode(ViewBag.Companies)),
+                    width: "98%",
+                    popupHeight: "500px",
+                    enableFilterSearch: true,
+                    //validationRules: {
+                    //    required: true
+                    //},
+                    //validationMessage: {
+                    //    required: "Complaint Category is Required"
+                    //},
+            fields: { value: "ID", text: "Name" },
+                    //change: "selectProductQuality",
+                    readOnly: false
+        }).data("ejDropDownList");
+        $('#Bus_Id').ejDropDownList({
+                    dataSource: @Html.Raw(Json.Encode(ViewBag.Buses)),
+                    width: "98%",
+                    popupHeight: "500px",
+                    enableFilterSearch: true,
+                    validationRules: {
+                        required: true
+                    },
+                    validationMessage: {
+                        required: "Complaint Category is Required"
+                    },
+            fields: { value: "Bus_ID", text: "Plate_No" },
+                    //change: "selectProductQuality",
+                    readOnly: false
+            }).data("ejDropDownList");
+    })
+    function NameChanged(args) {
+        var employee =@Html.Raw(Json.Encode(ViewBag.Employees));
+        var person = employee.filter((m) => { return m.Employee_ID == args.value });
+        $("#Email").val(person[0].Email);
+        $("#PhoneNumber").val(person[0].Phone);
+        var Company = $('#Company_Id').data("ejDropDownList")
+        Company.selectItemByValue(person[0].Company);
+    }
+</script>

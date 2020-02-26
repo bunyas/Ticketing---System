@@ -1,0 +1,221 @@
+D:\Buses\Buses\bin\Buses.dll.config
+D:\Buses\Buses\bin\Buses.dll
+D:\Buses\Buses\bin\Buses.pdb
+D:\Buses\Buses\bin\Antlr3.Runtime.dll
+D:\Buses\Buses\bin\EntityFramework.dll
+D:\Buses\Buses\bin\EntityFramework.SqlServer.dll
+D:\Buses\Buses\bin\Microsoft.AnalysisServices.AdomdClient.dll
+D:\Buses\Buses\bin\Microsoft.AspNet.Identity.Core.dll
+D:\Buses\Buses\bin\Microsoft.AspNet.Identity.EntityFramework.dll
+D:\Buses\Buses\bin\Microsoft.AspNet.Identity.Owin.dll
+D:\Buses\Buses\bin\Microsoft.Owin.dll
+D:\Buses\Buses\bin\Microsoft.Owin.Host.SystemWeb.dll
+D:\Buses\Buses\bin\Microsoft.Owin.Security.Cookies.dll
+D:\Buses\Buses\bin\Microsoft.Owin.Security.dll
+D:\Buses\Buses\bin\Microsoft.Owin.Security.Facebook.dll
+D:\Buses\Buses\bin\Microsoft.Owin.Security.Google.dll
+D:\Buses\Buses\bin\Microsoft.Owin.Security.MicrosoftAccount.dll
+D:\Buses\Buses\bin\Microsoft.Owin.Security.OAuth.dll
+D:\Buses\Buses\bin\Microsoft.Owin.Security.Twitter.dll
+D:\Buses\Buses\bin\Microsoft.Web.Infrastructure.dll
+D:\Buses\Buses\bin\Newtonsoft.Json.dll
+D:\Buses\Buses\bin\Owin.dll
+D:\Buses\Buses\bin\Syncfusion.Chart.Wpf.dll
+D:\Buses\Buses\bin\Syncfusion.Compression.Base.dll
+D:\Buses\Buses\bin\Syncfusion.DocIO.Base.dll
+D:\Buses\Buses\bin\Syncfusion.DocToPDFConverter.Base.dll
+D:\Buses\Buses\bin\Syncfusion.EJ.dll
+D:\Buses\Buses\bin\Syncfusion.EJ.Export.dll
+D:\Buses\Buses\bin\Syncfusion.EJ.Mvc.dll
+D:\Buses\Buses\bin\Syncfusion.EJ.PdfViewer.dll
+D:\Buses\Buses\bin\Syncfusion.EJ.Pivot.dll
+D:\Buses\Buses\bin\Syncfusion.EJ.ReportViewer.dll
+D:\Buses\Buses\bin\Syncfusion.Gauge.Wpf.dll
+D:\Buses\Buses\bin\Syncfusion.Linq.Base.dll
+D:\Buses\Buses\bin\Syncfusion.Olap.Base.dll
+D:\Buses\Buses\bin\Syncfusion.Pdf.Base.dll
+D:\Buses\Buses\bin\Syncfusion.PivotAnalysis.Base.dll
+D:\Buses\Buses\bin\Syncfusion.PMML.Base.dll
+D:\Buses\Buses\bin\Syncfusion.Presentation.Base.dll
+D:\Buses\Buses\bin\Syncfusion.SFMaps.WPF.dll
+D:\Buses\Buses\bin\Syncfusion.Shared.Wpf.dll
+D:\Buses\Buses\bin\Syncfusion.SpellChecker.Base.dll
+D:\Buses\Buses\bin\Syncfusion.XlsIO.Base.dll
+D:\Buses\Buses\bin\System.Net.Http.Formatting.dll
+D:\Buses\Buses\bin\System.Web.Helpers.dll
+D:\Buses\Buses\bin\System.Web.Http.dll
+D:\Buses\Buses\bin\System.Web.Http.WebHost.dll
+D:\Buses\Buses\bin\System.Web.Mvc.dll
+D:\Buses\Buses\bin\System.Web.Optimization.dll
+D:\Buses\Buses\bin\System.Web.Razor.dll
+D:\Buses\Buses\bin\System.Web.WebPages.Deployment.dll
+D:\Buses\Buses\bin\System.Web.WebPages.dll
+D:\Buses\Buses\bin\System.Web.WebPages.Razor.dll
+D:\Buses\Buses\bin\WebGrease.dll
+D:\Buses\Buses\bin\Antlr3.Runtime.pdb
+D:\Buses\Buses\bin\EntityFramework.xml
+D:\Buses\Buses\bin\EntityFramework.SqlServer.xml
+D:\Buses\Buses\bin\Microsoft.AspNet.Identity.Core.xml
+D:\Buses\Buses\bin\Microsoft.AspNet.Identity.EntityFramework.xml
+D:\Buses\Buses\bin\Microsoft.AspNet.Identity.Owin.xml
+D:\Buses\Buses\bin\Microsoft.Owin.xml
+D:\Buses\Buses\bin\Microsoft.Owin.Host.SystemWeb.xml
+D:\Buses\Buses\bin\Microsoft.Owin.Security.xml
+D:\Buses\Buses\bin\Microsoft.Owin.Security.Cookies.xml
+D:\Buses\Buses\bin\Microsoft.Owin.Security.Facebook.xml
+D:\Buses\Buses\bin\Microsoft.Owin.Security.Google.xml
+D:\Buses\Buses\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
+D:\Buses\Buses\bin\Microsoft.Owin.Security.OAuth.xml
+D:\Buses\Buses\bin\Microsoft.Owin.Security.Twitter.xml
+D:\Buses\Buses\bin\Newtonsoft.Json.xml
+D:\Buses\Buses\bin\Syncfusion.Chart.Wpf.xml
+D:\Buses\Buses\bin\Syncfusion.Compression.Base.xml
+D:\Buses\Buses\bin\Syncfusion.DocIO.Base.xml
+D:\Buses\Buses\bin\Syncfusion.DocToPDFConverter.Base.xml
+D:\Buses\Buses\bin\Syncfusion.EJ.xml
+D:\Buses\Buses\bin\Syncfusion.EJ.Export.xml
+D:\Buses\Buses\bin\Syncfusion.EJ.Mvc.xml
+D:\Buses\Buses\bin\Syncfusion.EJ.PdfViewer.xml
+D:\Buses\Buses\bin\Syncfusion.EJ.Pivot.xml
+D:\Buses\Buses\bin\Syncfusion.EJ.ReportViewer.xml
+D:\Buses\Buses\bin\Syncfusion.Gauge.Wpf.xml
+D:\Buses\Buses\bin\Syncfusion.Linq.Base.xml
+D:\Buses\Buses\bin\Syncfusion.Olap.Base.xml
+D:\Buses\Buses\bin\Syncfusion.Pdf.Base.xml
+D:\Buses\Buses\bin\Syncfusion.PivotAnalysis.Base.xml
+D:\Buses\Buses\bin\Syncfusion.PMML.Base.xml
+D:\Buses\Buses\bin\Syncfusion.Presentation.Base.xml
+D:\Buses\Buses\bin\Syncfusion.SFMaps.WPF.xml
+D:\Buses\Buses\bin\Syncfusion.Shared.Wpf.xml
+D:\Buses\Buses\bin\Syncfusion.SpellChecker.Base.xml
+D:\Buses\Buses\bin\Syncfusion.XlsIO.Base.xml
+D:\Buses\Buses\bin\System.Net.Http.Formatting.xml
+D:\Buses\Buses\bin\System.Web.Helpers.xml
+D:\Buses\Buses\bin\System.Web.Http.xml
+D:\Buses\Buses\bin\System.Web.Http.WebHost.xml
+D:\Buses\Buses\bin\System.Web.Mvc.xml
+D:\Buses\Buses\bin\System.Web.Optimization.xml
+D:\Buses\Buses\bin\System.Web.Razor.xml
+D:\Buses\Buses\bin\System.Web.WebPages.xml
+D:\Buses\Buses\bin\System.Web.WebPages.Deployment.xml
+D:\Buses\Buses\bin\System.Web.WebPages.Razor.xml
+D:\Buses\Buses\obj\Debug\Buses.csproj.CoreCompileInputs.cache
+D:\Buses\Buses\obj\Debug\Buses.csproj.CopyComplete
+D:\Buses\Buses\obj\Debug\Buses.dll
+D:\Buses\Buses\obj\Debug\Buses.pdb
+D:\Buses\Buses\obj\Debug\Buses.csprojAssemblyReference.cache
+D:\Buses\Buses\obj\Debug\Buses.Migrations.Bus_Id.resources
+D:\Buses\Buses\obj\Debug\Buses.csproj.GenerateResource.cache
+D:\Buses\Buses\bin\Quartz.dll
+D:\Buses\Buses\bin\Quartz.pdb
+D:\Buses\Buses\bin\Quartz.xml
+C:\IBS Projects 2020\BUS\Buses\Buses\Buses\bin\Buses.dll.config
+C:\IBS Projects 2020\BUS\Buses\Buses\Buses\bin\Buses.dll
+C:\IBS Projects 2020\BUS\Buses\Buses\Buses\bin\Buses.pdb
+C:\IBS Projects 2020\BUS\Buses\Buses\Buses\bin\Antlr3.Runtime.dll
+C:\IBS Projects 2020\BUS\Buses\Buses\Buses\bin\EntityFramework.dll
+C:\IBS Projects 2020\BUS\Buses\Buses\Buses\bin\EntityFramework.SqlServer.dll
+C:\IBS Projects 2020\BUS\Buses\Buses\Buses\bin\Microsoft.AnalysisServices.AdomdClient.dll
+C:\IBS Projects 2020\BUS\Buses\Buses\Buses\bin\Microsoft.AspNet.Identity.Core.dll
+C:\IBS Projects 2020\BUS\Buses\Buses\Buses\bin\Microsoft.AspNet.Identity.EntityFramework.dll
+C:\IBS Projects 2020\BUS\Buses\Buses\Buses\bin\Microsoft.AspNet.Identity.Owin.dll
+C:\IBS Projects 2020\BUS\Buses\Buses\Buses\bin\Microsoft.Owin.dll
+C:\IBS Projects 2020\BUS\Buses\Buses\Buses\bin\Microsoft.Owin.Host.SystemWeb.dll
+C:\IBS Projects 2020\BUS\Buses\Buses\Buses\bin\Microsoft.Owin.Security.Cookies.dll
+C:\IBS Projects 2020\BUS\Buses\Buses\Buses\bin\Microsoft.Owin.Security.dll
+C:\IBS Projects 2020\BUS\Buses\Buses\Buses\bin\Microsoft.Owin.Security.Facebook.dll
+C:\IBS Projects 2020\BUS\Buses\Buses\Buses\bin\Microsoft.Owin.Security.Google.dll
+C:\IBS Projects 2020\BUS\Buses\Buses\Buses\bin\Microsoft.Owin.Security.MicrosoftAccount.dll
+C:\IBS Projects 2020\BUS\Buses\Buses\Buses\bin\Microsoft.Owin.Security.OAuth.dll
+C:\IBS Projects 2020\BUS\Buses\Buses\Buses\bin\Microsoft.Owin.Security.Twitter.dll
+C:\IBS Projects 2020\BUS\Buses\Buses\Buses\bin\Microsoft.Web.Infrastructure.dll
+C:\IBS Projects 2020\BUS\Buses\Buses\Buses\bin\Newtonsoft.Json.dll
+C:\IBS Projects 2020\BUS\Buses\Buses\Buses\bin\Owin.dll
+C:\IBS Projects 2020\BUS\Buses\Buses\Buses\bin\Quartz.dll
+C:\IBS Projects 2020\BUS\Buses\Buses\Buses\bin\Syncfusion.Chart.Wpf.dll
+C:\IBS Projects 2020\BUS\Buses\Buses\Buses\bin\Syncfusion.Compression.Base.dll
+C:\IBS Projects 2020\BUS\Buses\Buses\Buses\bin\Syncfusion.DocIO.Base.dll
+C:\IBS Projects 2020\BUS\Buses\Buses\Buses\bin\Syncfusion.DocToPDFConverter.Base.dll
+C:\IBS Projects 2020\BUS\Buses\Buses\Buses\bin\Syncfusion.EJ.dll
+C:\IBS Projects 2020\BUS\Buses\Buses\Buses\bin\Syncfusion.EJ.Export.dll
+C:\IBS Projects 2020\BUS\Buses\Buses\Buses\bin\Syncfusion.EJ.Mvc.dll
+C:\IBS Projects 2020\BUS\Buses\Buses\Buses\bin\Syncfusion.EJ.PdfViewer.dll
+C:\IBS Projects 2020\BUS\Buses\Buses\Buses\bin\Syncfusion.EJ.Pivot.dll
+C:\IBS Projects 2020\BUS\Buses\Buses\Buses\bin\Syncfusion.EJ.ReportViewer.dll
+C:\IBS Projects 2020\BUS\Buses\Buses\Buses\bin\Syncfusion.Gauge.Wpf.dll
+C:\IBS Projects 2020\BUS\Buses\Buses\Buses\bin\Syncfusion.Linq.Base.dll
+C:\IBS Projects 2020\BUS\Buses\Buses\Buses\bin\Syncfusion.Olap.Base.dll
+C:\IBS Projects 2020\BUS\Buses\Buses\Buses\bin\Syncfusion.Pdf.Base.dll
+C:\IBS Projects 2020\BUS\Buses\Buses\Buses\bin\Syncfusion.PivotAnalysis.Base.dll
+C:\IBS Projects 2020\BUS\Buses\Buses\Buses\bin\Syncfusion.PMML.Base.dll
+C:\IBS Projects 2020\BUS\Buses\Buses\Buses\bin\Syncfusion.Presentation.Base.dll
+C:\IBS Projects 2020\BUS\Buses\Buses\Buses\bin\Syncfusion.SFMaps.WPF.dll
+C:\IBS Projects 2020\BUS\Buses\Buses\Buses\bin\Syncfusion.Shared.Wpf.dll
+C:\IBS Projects 2020\BUS\Buses\Buses\Buses\bin\Syncfusion.SpellChecker.Base.dll
+C:\IBS Projects 2020\BUS\Buses\Buses\Buses\bin\Syncfusion.XlsIO.Base.dll
+C:\IBS Projects 2020\BUS\Buses\Buses\Buses\bin\System.Net.Http.Formatting.dll
+C:\IBS Projects 2020\BUS\Buses\Buses\Buses\bin\System.Web.Helpers.dll
+C:\IBS Projects 2020\BUS\Buses\Buses\Buses\bin\System.Web.Http.dll
+C:\IBS Projects 2020\BUS\Buses\Buses\Buses\bin\System.Web.Http.WebHost.dll
+C:\IBS Projects 2020\BUS\Buses\Buses\Buses\bin\System.Web.Mvc.dll
+C:\IBS Projects 2020\BUS\Buses\Buses\Buses\bin\System.Web.Optimization.dll
+C:\IBS Projects 2020\BUS\Buses\Buses\Buses\bin\System.Web.Razor.dll
+C:\IBS Projects 2020\BUS\Buses\Buses\Buses\bin\System.Web.WebPages.Deployment.dll
+C:\IBS Projects 2020\BUS\Buses\Buses\Buses\bin\System.Web.WebPages.dll
+C:\IBS Projects 2020\BUS\Buses\Buses\Buses\bin\System.Web.WebPages.Razor.dll
+C:\IBS Projects 2020\BUS\Buses\Buses\Buses\bin\WebGrease.dll
+C:\IBS Projects 2020\BUS\Buses\Buses\Buses\bin\Antlr3.Runtime.pdb
+C:\IBS Projects 2020\BUS\Buses\Buses\Buses\bin\EntityFramework.xml
+C:\IBS Projects 2020\BUS\Buses\Buses\Buses\bin\EntityFramework.SqlServer.xml
+C:\IBS Projects 2020\BUS\Buses\Buses\Buses\bin\Microsoft.AspNet.Identity.Core.xml
+C:\IBS Projects 2020\BUS\Buses\Buses\Buses\bin\Microsoft.AspNet.Identity.EntityFramework.xml
+C:\IBS Projects 2020\BUS\Buses\Buses\Buses\bin\Microsoft.AspNet.Identity.Owin.xml
+C:\IBS Projects 2020\BUS\Buses\Buses\Buses\bin\Microsoft.Owin.xml
+C:\IBS Projects 2020\BUS\Buses\Buses\Buses\bin\Microsoft.Owin.Host.SystemWeb.xml
+C:\IBS Projects 2020\BUS\Buses\Buses\Buses\bin\Microsoft.Owin.Security.xml
+C:\IBS Projects 2020\BUS\Buses\Buses\Buses\bin\Microsoft.Owin.Security.Cookies.xml
+C:\IBS Projects 2020\BUS\Buses\Buses\Buses\bin\Microsoft.Owin.Security.Facebook.xml
+C:\IBS Projects 2020\BUS\Buses\Buses\Buses\bin\Microsoft.Owin.Security.Google.xml
+C:\IBS Projects 2020\BUS\Buses\Buses\Buses\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
+C:\IBS Projects 2020\BUS\Buses\Buses\Buses\bin\Microsoft.Owin.Security.OAuth.xml
+C:\IBS Projects 2020\BUS\Buses\Buses\Buses\bin\Microsoft.Owin.Security.Twitter.xml
+C:\IBS Projects 2020\BUS\Buses\Buses\Buses\bin\Newtonsoft.Json.xml
+C:\IBS Projects 2020\BUS\Buses\Buses\Buses\bin\Quartz.pdb
+C:\IBS Projects 2020\BUS\Buses\Buses\Buses\bin\Quartz.xml
+C:\IBS Projects 2020\BUS\Buses\Buses\Buses\bin\Syncfusion.Chart.Wpf.xml
+C:\IBS Projects 2020\BUS\Buses\Buses\Buses\bin\Syncfusion.Compression.Base.xml
+C:\IBS Projects 2020\BUS\Buses\Buses\Buses\bin\Syncfusion.DocIO.Base.xml
+C:\IBS Projects 2020\BUS\Buses\Buses\Buses\bin\Syncfusion.DocToPDFConverter.Base.xml
+C:\IBS Projects 2020\BUS\Buses\Buses\Buses\bin\Syncfusion.EJ.xml
+C:\IBS Projects 2020\BUS\Buses\Buses\Buses\bin\Syncfusion.EJ.Export.xml
+C:\IBS Projects 2020\BUS\Buses\Buses\Buses\bin\Syncfusion.EJ.Mvc.xml
+C:\IBS Projects 2020\BUS\Buses\Buses\Buses\bin\Syncfusion.EJ.PdfViewer.xml
+C:\IBS Projects 2020\BUS\Buses\Buses\Buses\bin\Syncfusion.EJ.Pivot.xml
+C:\IBS Projects 2020\BUS\Buses\Buses\Buses\bin\Syncfusion.EJ.ReportViewer.xml
+C:\IBS Projects 2020\BUS\Buses\Buses\Buses\bin\Syncfusion.Gauge.Wpf.xml
+C:\IBS Projects 2020\BUS\Buses\Buses\Buses\bin\Syncfusion.Linq.Base.xml
+C:\IBS Projects 2020\BUS\Buses\Buses\Buses\bin\Syncfusion.Olap.Base.xml
+C:\IBS Projects 2020\BUS\Buses\Buses\Buses\bin\Syncfusion.Pdf.Base.xml
+C:\IBS Projects 2020\BUS\Buses\Buses\Buses\bin\Syncfusion.PivotAnalysis.Base.xml
+C:\IBS Projects 2020\BUS\Buses\Buses\Buses\bin\Syncfusion.PMML.Base.xml
+C:\IBS Projects 2020\BUS\Buses\Buses\Buses\bin\Syncfusion.Presentation.Base.xml
+C:\IBS Projects 2020\BUS\Buses\Buses\Buses\bin\Syncfusion.SFMaps.WPF.xml
+C:\IBS Projects 2020\BUS\Buses\Buses\Buses\bin\Syncfusion.Shared.Wpf.xml
+C:\IBS Projects 2020\BUS\Buses\Buses\Buses\bin\Syncfusion.SpellChecker.Base.xml
+C:\IBS Projects 2020\BUS\Buses\Buses\Buses\bin\Syncfusion.XlsIO.Base.xml
+C:\IBS Projects 2020\BUS\Buses\Buses\Buses\bin\System.Net.Http.Formatting.xml
+C:\IBS Projects 2020\BUS\Buses\Buses\Buses\bin\System.Web.Helpers.xml
+C:\IBS Projects 2020\BUS\Buses\Buses\Buses\bin\System.Web.Http.xml
+C:\IBS Projects 2020\BUS\Buses\Buses\Buses\bin\System.Web.Http.WebHost.xml
+C:\IBS Projects 2020\BUS\Buses\Buses\Buses\bin\System.Web.Mvc.xml
+C:\IBS Projects 2020\BUS\Buses\Buses\Buses\bin\System.Web.Optimization.xml
+C:\IBS Projects 2020\BUS\Buses\Buses\Buses\bin\System.Web.Razor.xml
+C:\IBS Projects 2020\BUS\Buses\Buses\Buses\bin\System.Web.WebPages.xml
+C:\IBS Projects 2020\BUS\Buses\Buses\Buses\bin\System.Web.WebPages.Deployment.xml
+C:\IBS Projects 2020\BUS\Buses\Buses\Buses\bin\System.Web.WebPages.Razor.xml
+C:\IBS Projects 2020\BUS\Buses\Buses\Buses\obj\Debug\Buses.csprojAssemblyReference.cache
+C:\IBS Projects 2020\BUS\Buses\Buses\Buses\obj\Debug\Buses.Migrations.Bus_Id.resources
+C:\IBS Projects 2020\BUS\Buses\Buses\Buses\obj\Debug\Buses.csproj.GenerateResource.cache
+C:\IBS Projects 2020\BUS\Buses\Buses\Buses\obj\Debug\Buses.csproj.CopyComplete
+C:\IBS Projects 2020\BUS\Buses\Buses\Buses\obj\Debug\Buses.dll
+C:\IBS Projects 2020\BUS\Buses\Buses\Buses\obj\Debug\Buses.pdb

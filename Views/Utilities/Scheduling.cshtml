@@ -1,0 +1,173 @@
+﻿@{
+    ViewBag.Title = "Scheduling";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<ol class="breadcrumb" style="margin-top:30px;">
+    <li class="breadcrumb-item">
+        <a href="/Dashboard/LMISDashboard">Dashboard</a>
+    </li>
+    <li class="breadcrumb-item active">Bus Scheduling</li>
+</ol>
+
+@(Html.EJ().Grid<object>("Grid")
+                        .Datasource(datasource => datasource.URL("GetSchedules").InsertURL("SchedulesInsert").UpdateURL("SchedulesUpdate").Adaptor(AdaptorType.UrlAdaptor))
+                        .ShowColumnChooser()
+                        .ToolbarSettings(toolBar => toolBar.ShowToolbar().ToolbarItems(items =>
+                        {
+                            items.AddTool(ToolBarItems.Add);
+                            items.AddTool(ToolBarItems.Edit);
+                            items.AddTool(ToolBarItems.Delete);
+                            //items.AddTool(ToolBarItems.Update);
+                            items.AddTool(ToolBarItems.Cancel);
+                            items.AddTool(ToolBarItems.Search);
+                            items.AddTool(ToolBarItems.ExcelExport);
+                        }))
+                        .AllowSearching().SearchSettings(search =>
+                        {
+                            search.Fields(fields =>
+                            {
+
+                            });
+                            search.Operator(Operator.Contains);
+                            search.IgnoreCase(true);
+                        })
+                            .EditSettings(edit => { edit.AllowAdding().AllowDeleting().AllowEditing().EditMode(EditMode.DialogTemplate).DialogEditorTemplateID("#template"); })
+                         .TextWrapSettings(wrap => { wrap.WrapMode(WrapMode.Both); })
+                        .AllowSorting().AllowFiltering().ShowColumnChooser().AllowGrouping().AllowTextWrap().AllowPaging().PageSettings(page => page.PageSize(100)).IsResponsive().AllowResizeToFit()
+                        .AllowScrolling().ScrollSettings(scroll => { scroll.Width("100%"); }).FilterSettings(filter => { filter.FilterType(FilterType.Excel); })
+                        .Columns(col =>
+
+                        {
+                            col.Field("ID").HeaderText("Schedule ID").IsPrimaryKey(true).TextAlign(TextAlign.Left).Width("80").AllowEditing().Add();
+
+                            col.Field("Bus_ID").HeaderText("Assigned Bus").TextAlign(TextAlign.Left).Priority(4).Width("140").AllowEditing().ForeignKeyField("Bus_ID").ForeignKeyValue("Plate_No").DataSource((IEnumerable<object>)ViewBag.Buses).Add();
+
+                            col.Field("Boarding_Time").HeaderText("Expected Boarding Date and Time").Format("{0:dd/MM/yyyy HH:mm:ss}").TextAlign(TextAlign.Left).Priority(4).Width("140").AllowEditing().Add();
+
+                            col.Field("Departure_Time").HeaderText("Expected Departure Date and Time").Format("{0:dd/MM/yyyy HH:mm:ss}").TextAlign(TextAlign.Left).Priority(4).Width("140").AllowEditing().Add();
+
+                            col.Field("Arrival_Time").HeaderText("Expeceted Arrival Date And Time").Format("{0:dd/MM/yyyy HH:mm:ss}").Width("100").AllowEditing(false).Add();
+
+                            col.Field("Company_ID").HeaderText("Company").TextAlign(TextAlign.Left).Width("200").AllowEditing().ForeignKeyField("ID").ForeignKeyValue("Name").DataSource((IEnumerable<object>)ViewBag.Company).Add();
+
+                            col.Field("Status_ID").HeaderText("Current Status").AllowFiltering(false).Width("200").AllowEditing().ForeignKeyField("Status_ID").ForeignKeyValue("Status_Desc").DataSource((IEnumerable<object>)ViewBag.Status).Add();
+
+                        }).ClientSideEvents(evt => evt.ToolbarClick("OnToolbarClick9").Create("create").ActionComplete("edit")))
+
+<script type="text/template" id="template" @*style="width: 100%"*@>
+    <div style="width:1400px"></div>
+    <div id="defaultTab" style="width: 100%;">
+        <div id="tab1">
+            <table style="width:100%;" @*id="table2" border="1" cellpadding="3" cellspacing="0" border-collapse="none"*@>
+                <tr>
+                    <td style="text-align:left; width:10%;">Schedule ID</td>
+                    <td style="text-align: left"> <input type="text" id="ID" style="min-width:70%;" readonly="readonly" name="ID" value="{{:ID}}" class="form-control" /> </td>
+                </tr>
+                <tr>
+                    <td style="text-align: left;">Assigned Bus</td>
+                    <td style="text-align: left"> <input style="min-width:70%;" type="text" id="Bus_ID" name="Bus_ID" value="{{:Bus_ID}}" class="form-control" /> </td>
+                </tr>
+                <tr>
+                    <td style="text-align: left; width:10%;"> Expected Boarding Date and time</td>
+                    <td style="text-align: left;  width:50%;"> <input type="text" style="min-width:70%;" id="Boarding_Time" name="Boarding_Time" value="{{:Boarding_Time}}" class="form-control" /></td>
+                </tr>
+                <tr>
+                    <td style="text-align: left; width:10%;" id="ReceiivedDate"> Expected Departure Date and time</td>
+                    <td style="text-align: left;  width:50%;"> <input type="text" style="min-width:70%;" id="Departure_Time" name="Departure_Time" value="{{:Departure_Time}}" class="form-control" /></td>
+                </tr>
+                <tr>
+                    <td style="text-align: left;">Expected Arrival Date and Time</td>
+                    <td style="text-align: left"> <input type="text" style="min-width:70%;" id="Arrival_Time" name="Arrival_Time" value="{{:Arrival_Time}}" class="form-control" /> </td>
+                </tr>
+                <tr>
+                    <td style="text-align: left;">Company</td>
+                    <td style="text-align: left"> <input style="min-width:70%;" id="Company_ID" name="Company_ID" value="{{:Company_ID}}" class="form-control" /> </td>
+                </tr>
+                <tr>
+                    <td style="text-align: left;">Current Status</td>
+                    <td style="text-align: left"> <input style="min-width:70%;" id="Status_ID" name="Status_ID" value="{{:Status_ID}}" class="form-control" /> </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</script>
+
+<script>
+    function edit(args) {
+        if (args.requestType == "beginedit" || args.requestType == "add") {
+            window.requestType = args.requestType;
+            $($("#EditDialog_Grid_Save").hide()).after('<button id="save" type="button" onclick="savess();" class="btn btn-success btn-sm" > <span class="glyphicon glyphicon-save"></span> Save Schedule</button>');
+            $("#save").css({ "width": "200px", "height": "50px", "font-size": "17px", "float": "right", "margin-left": "10px", "margin-top": "20px", "margin-bottom": "10px" });
+            $("#EditDialog_Grid_Cancel").ejButton("destroy");
+            $($("#EditDialog_Grid_Cancel").hide()).after(' <button type="button" id="cancel" onclick="cancelss()" class="btn btn-danger btn-sm" ><span class="glyphicon glyphicon-remove-circle"></span> Cancel</button>');
+            $("#cancel").css({ "width": "100px", "height": "50px", "float": "right", "margin-left": "10px", "margin-top": "20px", "margin-bottom": "10px" });
+            $("#Grid_dialogEdit_closebutton").hide();
+            var objDialog = $("#Grid").data("ejGrid");
+            $("#" + objDialog._id + "_dialogEdit").ejDialog({ open: "open" });
+            $('#Company_ID').ejDropDownList({
+
+                dataSource: @Html.Raw(Json.Encode(ViewBag.Company)),
+                enabled: true,
+                width: "70%",
+                enableFilterSearch: true,
+               // change: "setCommunicated_Lev3",
+                fields: { value: "ID", text: "Name" },
+            }).data("ejDropDownList");
+            $('#Status_ID').ejDropDownList({
+
+                dataSource: @Html.Raw(Json.Encode(ViewBag.Status)),
+                enabled: true,
+                width: "70%",
+                enableFilterSearch: true,
+               // change: "setCommunicated_Lev3",
+                fields: { value: "Status_ID", text: "Status_Desc" },
+            }).data("ejDropDownList");
+            $('#Bus_ID').ejDropDownList({
+
+                dataSource: @Html.Raw(Json.Encode(ViewBag.Buses)),
+                enabled: true,
+                width: "70%",
+                enableFilterSearch: true,
+               // change: "setCommunicated_Lev3",
+                fields: { value: "Bus_ID", text: "Plate_No" },
+            }).data("ejDropDownList");
+            $("#Boarding_Time").ejDateTimePicker(
+                {
+                    width: '70%',
+                    dateFormat: "dd/MM/yyyy HH:mm:ss"
+                }
+            );
+            $("#Departure_Time").ejDateTimePicker(
+                {
+                    width: '70%',
+                    dateFormat: "dd/MM/yyyy HH:mm:ss"
+                }
+            );
+            $("#Arrival_Time").ejDateTimePicker(
+                {
+                    width: '70%',
+                    dateFormat: "dd/MM/yyyy HH:mm:ss"
+                }
+            );
+
+        }
+    }
+    function open(args) {
+
+        var objDialog = $("#Grid").data("ejGrid");
+        var $dialogWrapper = objDialog.element.find("#" + objDialog._id + "_dialogEdit_wrapper");
+        $dialogWrapper.css("top", "10px");
+        $dialogWrapper.css("left", "0px");
+        $dialogWrapper.css("right", "0px");
+    }
+    function savess(args) {
+        var obj = $("#Grid").ejGrid("instance");
+        obj.endEdit();
+        obj.refreshContent();
+    }
+    function cancelss(args) {
+        var obj = $("#Grid").ejGrid("instance")
+        obj.cancelEdit();
+    }
+</script>

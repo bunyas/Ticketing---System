@@ -1,0 +1,62 @@
+﻿@using Microsoft.AspNet.Identity
+@if (Request.IsAuthenticated)
+{
+    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+    {
+        @Html.AntiForgeryToken()
+        <div class="nav navbar-nav navbar-right">
+            @Html.EJ().Menu("mainMenu1").Items(items =>
+       {
+
+           items.Add().Url("#").Text("Hello " + User.Identity.Name).Children(child =>
+           {
+               if (User.IsInRole("Super Administrator") || User.IsInRole("Administrator"))
+               {
+
+                   // Untilities
+                   child.Add().Url("#").Text("Utilities").Children(child11 =>
+                   {
+                       child11.Add().Url(Url.Action("Register", "Account")).Text("Register Users");
+                       //child11.Add().Id("Utilities1").Url(Url.Action("Register", "Account")).Text("Manage Users");
+                       child11.Add().Url(Url.Action("UserManagement", "Account")).Text("Manage Users");
+                       child11.Add().Url(Url.Action("UsersWithRoles", "Account")).Text("Reset User Passwords");
+                   });
+                   child.Add().Url("").Text("User Manual").Children(child0 =>
+                   {
+                       child0.Add().Url("/HTML/index.html").Text("EAMS User Manual");
+                       child0.Add().Url("../EAMSManual.pdf").Text("EAMS User Manual PDF");
+                   });
+                   child.Add().Url(Url.Action("Login", "Account")).Text("Log out");
+               }
+               else
+               {
+                   child.Add().Url("").Text("User Manual").Children(child0 =>
+                   {
+                       child0.Add().Url("/HTML/index.html").Text("EAMS User Manual");
+                       child0.Add().Url("../EAMSManual.pdf").Text("EAMS User Manual PDF");
+                   });
+                   child.Add().Url(Url.Action("ResetPassword", "Account")).Text("Reset Password");
+                   child.Add().Url(Url.Action("Login", "Account")).Text("Log out");
+               }
+
+           });
+
+       }).EnableSeparator(false).CssClass("Black-Menu")
+        </div>
+
+
+        @*<ul class="nav navbar-nav navbar-right">
+                <li>
+                    @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
+                </li>
+                <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
+            </ul>*@
+    }
+}
+else
+{
+    <ul class="nav navbar-nav navbar-right">
+        <li>@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
+        <li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+    </ul>
+}

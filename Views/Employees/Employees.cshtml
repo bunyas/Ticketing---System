@@ -1,0 +1,560 @@
+﻿
+@{
+    ViewBag.Title = "Employees";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<ol class="breadcrumb" style="margin-top:30px;">
+    <li class="breadcrumb-item">
+        <a href="/Dashboard/LMISDashboard">Dashboard</a>
+    </li>
+    <li class="breadcrumb-item active">Employees</li>
+</ol>
+@(Html.EJ().Grid<object>("Grid")
+                .Datasource(datasource => datasource.URL("GetEmployes").InsertURL("EmployeeInsert").UpdateURL("EmployeeUpdate").Adaptor(AdaptorType.UrlAdaptor))
+                .ShowColumnChooser()
+                .ToolbarSettings(toolBar => toolBar.ShowToolbar().ToolbarItems(items =>
+                {
+                    items.AddTool(ToolBarItems.Add);
+                    items.AddTool(ToolBarItems.Edit);
+                    items.AddTool(ToolBarItems.Delete);
+        //items.AddTool(ToolBarItems.Update);
+        items.AddTool(ToolBarItems.Cancel);
+                    items.AddTool(ToolBarItems.Search);
+                    items.AddTool(ToolBarItems.ExcelExport);
+                }))
+                .AllowSearching().SearchSettings(search =>
+                {
+                    search.Fields(fields =>
+                    {
+
+                    });
+                    search.Operator(Operator.Contains);
+                    search.IgnoreCase(true);
+                })
+                    .EditSettings(edit => { edit.AllowAdding().AllowDeleting().AllowEditing().EditMode(EditMode.DialogTemplate).DialogEditorTemplateID("#template"); })
+                 .TextWrapSettings(wrap => { wrap.WrapMode(WrapMode.Both); })
+                .AllowSorting().AllowFiltering().ShowColumnChooser().AllowGrouping().AllowTextWrap().AllowPaging().PageSettings(page => page.PageSize(100)).IsResponsive().AllowResizeToFit()
+                .AllowScrolling().ScrollSettings(scroll => { scroll.Width("100%"); }).FilterSettings(filter => { filter.FilterType(FilterType.Excel); })
+                .Columns(col =>
+
+                {
+
+                    col.Field("Employee_ID").HeaderText("Employee ID").IsPrimaryKey(true).TextAlign(TextAlign.Left).Width("80").AllowEditing().Add();
+
+                    col.Field("Name").HeaderText("Name").TextAlign(TextAlign.Left).Priority(4).Width("140").AllowEditing().Add();
+
+                    col.Field("Gender").HeaderText("Gender").Width("100").AllowEditing().ForeignKeyField("Gender_Code").ForeignKeyValue("Gender_Desc").DataSource((IEnumerable<object>)ViewBag.Gender).Add();
+
+                    col.Field("Nationality").HeaderText("Nationality").IsPrimaryKey(true).TextAlign(TextAlign.Left).Priority(4).Width(180).ForeignKeyField("CountryCode").ForeignKeyValue("CountryName").DataSource((IEnumerable<object>)ViewBag.Nationality).Add();
+
+                    col.Field("Company").HeaderText("Company").TextAlign(TextAlign.Left).Width("200").AllowEditing().ForeignKeyField("ID").ForeignKeyValue("Name").DataSource((IEnumerable<object>)ViewBag.Company).Add();
+
+                    col.Field("Title").HeaderText("Department").TextAlign(TextAlign.Left).Width("150").AllowEditing().ForeignKeyField("Title_ID").ForeignKeyValue("Title_Desc").DataSource((IEnumerable<object>)ViewBag.Titles).Add();
+
+                    col.Field("Date_Of_Birth").HeaderText("DOB").Width("140").AllowFiltering(false).Format("{0:dd/MM/yyyy}").Add();
+
+                    col.Field("Email").HeaderText("Email").AllowFiltering(false).Width("200").AllowEditing().Add();
+
+                    col.Field("Phone").HeaderText("Mobile Phone").AllowFiltering(false).TextAlign(TextAlign.Left).Priority(4).Width("100").AllowEditing().Add();
+
+                    col.Field("Telephone").HeaderText("Telephone").AllowFiltering(false).TextAlign(TextAlign.Left).Width("100").AllowEditing().Add();
+
+                    col.Field("NIN_No").HeaderText("NIN Number").TextAlign(TextAlign.Left).Priority(4).Width("200").AllowEditing().Add();
+
+        //col.Field("Result").HeaderText("Result").TextAlign(TextAlign.Left).Priority(4).Width("100").AllowFiltering(false).Add();
+
+    }).ClientSideEvents(evt => evt.ToolbarClick("OnToolbarClick9").Create("create").ActionComplete("edit")))
+
+<script type="text/template" id="template" @*style="width: 100%"*@>
+    @*<b>Complaints</b>*@
+    <div style="width:1400px"></div>
+    <div id="defaultTab" style="width: 100%;">
+
+        <div id="tab1">
+
+            <div class="panel-group" id="accordion">
+                <div class="panel panel-default" id="complaintHeader">
+                    <div class="panel-heading">
+                        <h2 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapse1">
+                                Employee Details
+                            </a>
+                        </h2>
+                    </div>
+                    <div id="collapse1" class="panel-collapse collapse in">
+                        <div>
+                            <table style="width:100%;" @*id="table2" border="1" cellpadding="3" cellspacing="0" border-collapse="none"*@>
+
+                                <tr>
+                                    <td style="text-align:left; width:10%;">Employee Number</td>
+                                    <td style="text-align: left"> <input type="text" id="Employee_ID" style="min-width:98%;" readonly="readonly" name="Employee_ID" value="{{:Employee_ID}}" class="form-control" /> </td>
+                                    <td style="text-align: left; width:10%;" id="ReceiivedDate">Employee Name</td>
+                                    <td style="text-align: left;  width:50%;"> <input type="text" style="min-width:98%;" id="Name" name="Name" value="{{:Name}}" class="form-control" /></td>
+                                </tr>
+                                <tr>
+
+                                    <td style="text-align: left;">Gender</td>
+                                    <td style="text-align: left"> <input type="text" style="min-width:98%;" id="Gender" name="Gender" value="{{:Gender}}" class="form-control" /> </td>
+
+                                    <td style="text-align: left;">Nationality</td>
+                                    <td style="text-align: left"> <input style="min-width:98%;" id="Nationality" name="Nationality" value="{{:Nationality}}" class="form-control" /> </td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: left;">Company</td>
+                                    <td style="text-align: left"> <input style="min-width:98%;" type="text" id="Company" name="Company" value="{{:Company}}" class="form-control " /> </td>
+                                    <td style="text-align: left;">Department</td>
+                                    <td style="text-align: left"> <input style="min-width:98%;" type="text" id="Title" name="Title" value="{{:Title}}" class="form-control" /> </td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: left;">Date Of Birth</td>
+                                    <td style="text-align: left"> <input style="min-width:98%;" type="text" id="Date_Of_Birth" name="Date_Of_Birth" value="{{:Date_Of_Birth}}" class="form-control " /> </td>
+                                    <td style="text-align: left;">Email</td>
+                                    <td style="text-align: left"> <input style="min-width:98%;" type="text" id="Email" name="Email" value="{{:Email}}" class="form-control" /> </td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: left;">Phone</td>
+                                    <td style="text-align: left"> <input style="min-width:98%;" type="text" id="Phone" name="Phone" value="{{:Phone}}" class="form-control " /> </td>
+                                    <td style="text-align: left;">Telephone</td>
+                                    <td style="text-align: left"> <input style="min-width:98%;" type="text" id="Telephone" name="Telephone" value="{{:Telephone}}" class="form-control" /> </td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: left;">NIN Number</td>
+                                    <td style="text-align: left"> <input style="min-width:98%;" type="text" id="NIN_No" name="NIN_No" value="{{:NIN_No}}" class="form-control " /> </td>
+                                    <td style="text-align: left;">Photo</td>
+                                    <td style="text-align: left">
+                                        <div id="uploadbox"></div>
+                                        @*<input style="min-width:98%;" type="file" id="PhotoUpload" name="PhotoUpload" value="{{:PhotoUpload}}" class="form-control" onchange="SelecetedFile()" />*@
+                                        <div id="partialPlaceHolder" style="width:100%"> </div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel panel-default" id="complainantDetails">
+                    <div class="panel-heading">
+                        <h4 class="panel-title ">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapse2">
+                                Education background
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapse2" class="panel-collapse collapse in">
+                        <div id="EducationGrid"></div>
+                        <div style="margin-top:10px;">
+                            <table>
+                                <tr>
+                                    <td>Select the level of eduction</td>
+                                    <td>Select the document to upload</td>
+                                </tr>
+                                <tr>
+                                    <td><input type="text" id="Level_of_education" name="Level_of_education" /></td>
+                                    <td><div id="EducDocs"></div></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">
+                                        <div id="UploadedDocs"></div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel panel-default" id="level1Communication">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapse4">
+                                Next Of Kin Details
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapse4" class="panel-collapse collapse collapse in">
+                        <div>
+                            <div id="GridNOK"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>
+
+<script>
+    function edit(args) {
+
+        if (args.requestType == "beginedit" || args.requestType == "add") {
+            window.requestType = args.requestType;
+            $($("#EditDialog_Grid_Save").hide()).after('<button id="save" type="button" onclick="savess();" class="btn btn-success btn-sm" > <span class="glyphicon glyphicon-save"></span> Save Employee</button>');
+            $("#save").css({ "width": "200px", "height": "50px", "font-size": "17px", "float": "right", "margin-left": "10px", "margin-top": "20px", "margin-bottom": "10px" });
+            $("#EditDialog_Grid_Cancel").ejButton("destroy");
+            $($("#EditDialog_Grid_Cancel").hide()).after(' <button type="button" id="cancel" onclick="cancelss()" class="btn btn-danger btn-sm" ><span class="glyphicon glyphicon-remove-circle"></span> Cancel</button>');
+            $("#cancel").css({ "width": "100px", "height": "50px", "float": "right", "margin-left": "10px", "margin-top": "20px", "margin-bottom": "10px" });
+            $($("#Grid_dialogEdit_closebutton").hide()).after(' <a href="#" id="Cancel_Top" onclick="cancelss()" ><span class="glyphicon glyphicon-remove"></span></a>');
+            $("#Cancel_Top").css({ /*"width": "100px", "height": "50px",*/ "float": "right", "margin-right": "1%", /*"margin-top": "20px", "margin-bottom": "10px"*/ });
+            var objDialog = $("#Grid").data("ejGrid");
+            $("#" + objDialog._id + "_dialogEdit").ejDialog({ open: "open" });
+            $("#EducDocs").ejUploadbox({ saveUrl: "SaveEducDoc", begin: "Educbegin", });
+            $('#uploadbox').ejUploadbox({
+                saveUrl: "SavePhoto",
+                dialogAction: { closeOnComplete: true },
+                multipleFilesSelection: false,
+                showFileDetails: false,
+                begin: "Filebegin",
+                removeUrl:"Remove",
+                fileSelect: "fileselect",
+                autoUpload: false,
+                cssClass: "gradient-purple",
+                buttonText: { browse: "Choose File", upload: "Upload File", cancel: "Cancel Upload" },
+
+            });
+             $('#Gender').ejDropDownList({
+
+                dataSource: @Html.Raw(Json.Encode(ViewBag.Gender)),
+                enabled: true,
+                 width: "98%",
+                //change: "setCommunicated_Lev3",
+                fields: { value: "Gender_Code", text: "Gender_Desc" },
+            }).data("ejDropDownList");
+
+            $('#Nationality').ejDropDownList({
+
+                dataSource: @Html.Raw(Json.Encode(ViewBag.Nationality)),
+                enabled: true,
+                width: "98%",
+                enableFilterSearch: true,
+                //change: "setCommunicated_Lev3",
+                fields: { value: "CountryCode", text: "CountryName" },
+            }).data("ejDropDownList");
+            $('#Company').ejDropDownList({
+
+                dataSource: @Html.Raw(Json.Encode(ViewBag.Company)),
+                enabled: true,
+                width: "98%",
+                enableFilterSearch: true,
+               // change: "setCommunicated_Lev3",
+                fields: { value: "ID", text: "Name" },
+            }).data("ejDropDownList");
+
+            $('#Level_of_education').ejDropDownList({
+
+                dataSource: @Html.Raw(Json.Encode(ViewBag.Education_Level)),
+                enabled: true,
+                width: "98%",
+                enableFilterSearch: true,
+               // change: "setCommunicated_Lev3",
+                fields: { value: "LevelID", text: "LevelDesc" },
+            }).data("ejDropDownList");
+            $('#Title').ejDropDownList({
+
+                dataSource: @Html.Raw(Json.Encode(ViewBag.Titles)),
+                enabled: true,
+                width: "98%",
+                enableFilterSearch: true,
+               // change: "setCommunicated_Lev3",
+                fields: { value: "Title_ID", text: "Title_Desc" },
+            }).data("ejDropDownList");
+            $("#Date_Of_Birth").ejDatePicker(
+                {
+                    maxDate: new Date(), value: new Date(new Date($("#Date_Of_Birth").attr("value"))),
+                    dateFormat: "dd/MM/yyyy",
+                    width: "98%"//,
+                    //validationRules: {
+                    //    required: true
+                    //},
+                    //validationMessage: {
+                    //    required: "Date recieved is Required"
+                    //},
+                });
+            var educ =  @Html.Raw(Json.Encode(ViewBag.Education_Level));
+            $("#EducationGrid").ejGrid({
+                dataSource: ej.DataManager({ url: "GetEducation?EmployeeID=" + $("#Employee_ID").val(), batchUrl: "BatchEducationUpdate", adaptor: "UrlAdaptor" }),
+                //query: new ej.Query().addParams('param_on', order_no),
+                allowGrouping: false,
+
+                toolbarSettings: {
+                    showToolbar: true,
+                    toolbarItems: ["add", "edit", "delete", /*"update",*/ "cancel"]
+
+                },
+                allowEditing: true,
+                editSettings: { allowDeleting: true, allowEditing: true, allowAdding: true, editMode: 'batch', rowPosition: "bottom" },
+                allowScrolling: true, create: "create",
+                scrollSettings: { width: "100%", height: "auto" },
+                allowPaging: false,
+                enableAltRow: true,
+                showColumnChooser: true,
+                allowSorting: true,
+                allowTextWrap: true,
+                textWrapSettings: { wrapMode: "both" },
+                cellEdit: "cellEdit",
+                allowResizeToFit: true,
+                showStackedHeader: true,
+                isResponsive: true,
+                enableResponsiveRow: true,
+                allowScrolling: true, create: "create",
+                //queryCellInfo: "queryCellInfo",
+                cellSave: "cellsave",
+                actionComplete: "successSave",
+                actionFailure: "failure",
+                allowKeyBoardNavigation: true,
+                columns: [
+                    { field: "Id", headerText: "Certificate ID", visible: false, allowEditing: true, isPrimaryKey: true },
+                    { field: "EmployeeID", headerText: "Employee ID", visible: false, allowEditing: true },
+                    {
+                        field: "Name", headerText: "School/ Institution", headerTooltip: "To add new line use Shift-Enter ", editTemplate: {
+                            create: function () {
+                                return "<textarea style='width:100%; display:block; max-width:100%;line-height:3.0;padding:15px 15px  30px; border-radius:3px; border:1px solid #F7E98D; font:13px Tahoma, cursive; transition:box-shadow 0.5s ease; box-shadow:0 4px 6px rgba(0,0,0,0.1); font-smoothing:subpixel-antialiased; background:linear-gradient(#F9EFAF, #F7E98D); background:-o-linear-gradient(#F9EFAF, #F7E98D); background:-ms-linear-gradient(#F9EFAF, #F7E98D); background:-moz-linear-gradient(#F9EFAF, #F7E98D); background:-webkit-linear-gradient(#F9EFAF, #F7E98D);'>{{:Action_description}}</textarea>";
+                            },
+                            write: function (args) {
+                                $('.text').css("max-width", args.element.parent("td").width());
+                                $('.text').css("max-height", args.element.parent("td").height());
+                                null;
+                            },
+                            read: function (args) {
+                                return args.val();
+                            },
+                        }
+                        , width: 100,
+                    },
+                    { field: "Level_Of_Education", visible: true, allowEditing: true, headerText: "Level of Education", editType: "dropdownedit", editParams: { enableAnimation: true }, foreignKeyField: "LevelID", foreignKeyValue: "LevelDesc", dataSource: educ, width: 80 },
+                    //{
+                    //    field: "School", headerText: "School", headerTooltip: "To add new line use Shift-Enter ", editTemplate: {
+                    //        create: function () {
+                    //            return "<textarea style='width:100%; display:block; max-width:100%;line-height:3.0;padding:15px 15px  30px; border-radius:3px; border:1px solid #F7E98D; font:13px Tahoma, cursive; transition:box-shadow 0.5s ease; box-shadow:0 4px 6px rgba(0,0,0,0.1); font-smoothing:subpixel-antialiased; background:linear-gradient(#F9EFAF, #F7E98D); background:-o-linear-gradient(#F9EFAF, #F7E98D); background:-ms-linear-gradient(#F9EFAF, #F7E98D); background:-moz-linear-gradient(#F9EFAF, #F7E98D); background:-webkit-linear-gradient(#F9EFAF, #F7E98D);'>{{:Action_description}}</textarea>";
+                    //        },
+                    //        write: function (args) {
+                    //            $('.text').css("max-width", args.element.parent("td").width());
+                    //            $('.text').css("max-height", args.element.parent("td").height());
+                    //            null;
+                    //        },
+                    //        read: function (args) {
+                    //            return args.val();
+                    //        },
+                    //    }
+                    //    , width: 100,
+                    //},
+                    //{ field: "Level_Of_Education", headerText: "Level of Education", visible: true, allowEditing: true },
+                    { field: "Start_Year", headerText: "Start Year", allowEditing: true, width: 80, editType: ej.Grid.EditingType.Numeric, editParams: { minValue: 0 } },
+                    { field: "End_Year", headerText: "End Year", allowEditing: true, width: 80, editType: ej.Grid.EditingType.Numeric, editParams: { minValue: 0 } },
+                    { field: "Grade", headerText: "Grade/ CGPA", allowEditing: true, width: 80, editType: ej.Grid.EditingType.Numeric, editParams: { minValue: 0 } },
+
+                ]
+            });
+
+            $("#GridNOK").ejGrid({
+                dataSource: ej.DataManager({ url: "GetNOK?EmployeeID=" + $("#Employee_ID").val(), batchUrl: "BatchEmployee_NOKUpdate", adaptor: "UrlAdaptor" }),
+                //query: new ej.Query().addParams('param_on', order_no),
+                allowGrouping: false,
+
+                toolbarSettings: {
+                    showToolbar: true,
+                    toolbarItems: ["add", "edit", "delete",/* "update",*/ "cancel"]
+
+                },
+                allowEditing: true,
+                editSettings: { allowDeleting: true, allowEditing: true, allowAdding: true, editMode: 'batch', rowPosition: "bottom" },
+                allowScrolling: true, create: "create",
+                scrollSettings: { width: "100%", height: "auto" },
+                allowPaging: false,
+                enableAltRow: true,
+                showColumnChooser: true,
+                allowSorting: true,
+                allowTextWrap: true,
+                textWrapSettings: { wrapMode: "both" },
+                cellEdit: "cellEditNOK",
+                allowResizeToFit: true,
+                showStackedHeader: true,
+                isResponsive: true,
+                enableResponsiveRow: true,
+                allowScrolling: true, create: "create",
+                //queryCellInfo: "queryCellInfo",
+                cellSave: "cellsave",
+                //actionComplete: "successSave",
+                //actionFailure: "failure",
+                allowKeyBoardNavigation: true,
+                columns: [
+                    { field: "ID", headerText: "ID", visible: false, allowEditing: true/*, isPrimaryKey: true*/ },
+                    { field: "Employee_ID", headerText: "Employee ID", visible: false, allowEditing: true },
+                    {
+                        field: "Name", headerText: "Name", headerTooltip: "To add new line use Shift-Enter ", editTemplate: {
+                            create: function () {
+                                return "<textarea style='width:100%; display:block; max-width:100%;line-height:3.0;padding:15px 15px  30px; border-radius:3px; border:1px solid #F7E98D; font:13px Tahoma, cursive; transition:box-shadow 0.5s ease; box-shadow:0 4px 6px rgba(0,0,0,0.1); font-smoothing:subpixel-antialiased; background:linear-gradient(#F9EFAF, #F7E98D); background:-o-linear-gradient(#F9EFAF, #F7E98D); background:-ms-linear-gradient(#F9EFAF, #F7E98D); background:-moz-linear-gradient(#F9EFAF, #F7E98D); background:-webkit-linear-gradient(#F9EFAF, #F7E98D);'>{{:Action_description}}</textarea>";
+                            },
+                            write: function (args) {
+                                $('.text').css("max-width", args.element.parent("td").width());
+                                $('.text').css("max-height", args.element.parent("td").height());
+                                null;
+                            },
+                            read: function (args) {
+                                return args.val();
+                            },
+                        }
+                        , width: 100,
+                    },
+                    { field: "ContactType", visible: true, allowEditing: true, headerText: "Contact Type", editType: "dropdownedit", editParams: { enableAnimation: true }, foreignKeyField: "ContactID", foreignKeyValue: "Contact_Desc", dataSource:  @Html.Raw(Json.Encode(ViewBag.Contact_Type)), width: 100 },
+                    { field: "Gender", visible: true, allowEditing: true, headerText: "Gender", editType: "dropdownedit", editParams: { enableAnimation: true }, foreignKeyField: "Gender_Code", foreignKeyValue: "Gender_Desc", dataSource:  @Html.Raw(Json.Encode(ViewBag.Gender)), width: 100 },
+                    //{ field: "Level_Of_Education", headerText: "Level of Education", visible: true, allowEditing: true },
+                    { field: "Telephone", headerText: "Tel 1", allowEditing: true, width: 120, editType: ej.Grid.EditingType.Numeric, editParams: { minValue: 0 } },
+                    { field: "Mobile", headerText: "Tel 2", allowEditing: true, width: 120, editType: ej.Grid.EditingType.Numeric, editParams: { minValue: 0 } },
+                    { field: "Email", headerText: "Email", visible: true, width: 200, allowEditing: true },
+                    { field: "NIN_Number", headerText: "NIN Number", visible: true, width: 200, allowEditing: true },
+                    {
+                        field: "Address", headerText: "Address", headerTooltip: "To add new line use Shift-Enter ", editTemplate: {
+                            create: function () {
+                                return "<textarea style='width:100%; display:block; max-width:100%;line-height:3.0;padding:15px 15px  30px; border-radius:3px; border:1px solid #F7E98D; font:13px Tahoma, cursive; transition:box-shadow 0.5s ease; box-shadow:0 4px 6px rgba(0,0,0,0.1); font-smoothing:subpixel-antialiased; background:linear-gradient(#F9EFAF, #F7E98D); background:-o-linear-gradient(#F9EFAF, #F7E98D); background:-ms-linear-gradient(#F9EFAF, #F7E98D); background:-moz-linear-gradient(#F9EFAF, #F7E98D); background:-webkit-linear-gradient(#F9EFAF, #F7E98D);'>{{:Action_description}}</textarea>";
+                            },
+                            write: function (args) {
+                                $('.text').css("max-width", args.element.parent("td").width());
+                                $('.text').css("max-height", args.element.parent("td").height());
+                                null;
+                            },
+                            read: function (args) {
+                                return args.val();
+                            },
+                        }
+                        , width: 100,
+                    },
+
+                ]
+            });
+
+            if (args.requestType == "add") {
+                $.ajax({
+                    type: "POST",
+                    url: "GetEmployeeID",
+                    data: {},
+                    datatype: "html",
+                    contentType: 'application/x-www-form-urlencoded',
+                    success: function (data) {
+                        $('#Employee_ID').val(data);
+                        var grid = $("#EducationGrid").ejGrid("instance");
+                        grid.dataSource(ej.DataManager({ url: "GetEducation?EmployeeID=" + $('#Employee_ID').val(), batchUrl: "BatchEducationUpdate", adaptor: "UrlAdaptor" }));
+                        var grid = $("#GridNOK").ejGrid("instance");
+                        grid.dataSource(ej.DataManager({ url: "GetNOK?EmployeeID=" + $('#Employee_ID').val(), batchUrl: "BatchEmployee_NOKUpdate", adaptor: "UrlAdaptor" }));
+                        //var grid1 = $("#otherProductsGrid").ejGrid("instance");
+                        //grid1.dataSource(ej.DataManager({ url: 'Quality_ComplaintsOP?e_reg_complaint_code=' + $('#e_reg_complaint_No').val(), batchUrl: "BatchUpdateQualityIssues", adaptor: "UrlAdaptor" }));
+                        //var grid2 = $("#ActionTakenPanelGrid").ejGrid("instance");
+                        //grid2.dataSource(ej.DataManager({ url: 'GetActionTracker?e_reg_complaint_code=' + $('#e_reg_complaint_code').val(), batchUrl: "BatchUpdateActionTaken", adaptor: "UrlAdaptor" }));
+
+                    },
+                    error: function () {
+                        alert("Error occured!!");
+                    }
+                });
+            }
+
+        }
+    }
+    function fileselect(e) {
+        for (var i = 0; i < e.files.length; i++) {
+            $("#partialPlaceHolder").append('<div>' + e.files[i].name + '</div>');
+        }
+    }
+    function Filebegin(args) {
+        var employeeID = $("#Employee_ID").val();
+        args.model.saveUrl = "SavePhoto?EmployeeID=" + employeeID;
+    }
+    function Educbegin(args) {
+        var DropDownListEduc = $('#Level_of_education').ejDropDownList({}).data("ejDropDownList");
+        if (DropDownListEduc.getSelectedValue() == null) { alert("Please select the level of education before you proceed"); return; }
+        else {
+            var employeeID = $("#Employee_ID").val();
+            args.model.saveUrl = "SaveEducDoc?EmployeeID=" + employeeID + "&&educ_Level=" + DropDownListEduc.getSelectedValue();
+            $("#UploadedDocs").append('<div>' + args.files.name + '</div>');
+        }
+
+    }
+    function open(args) {
+
+        var objDialog = $("#Grid").data("ejGrid");
+        var $dialogWrapper = objDialog.element.find("#" + objDialog._id + "_dialogEdit_wrapper");
+        $dialogWrapper.css("top", "10px");
+        $dialogWrapper.css("left", "0px");
+        $dialogWrapper.css("right", "0px");
+    }
+    function savess(args) {
+        debugger;
+        // Upload the files
+        var uploadObj = $("#uploadbox").data("ejUploadbox");
+        var files = uploadObj._files;
+        if (files != undefined) {
+            uploadObj.upload(); // Upload the files
+        }
+
+        var obj1 = $("#EducationGrid").ejGrid("instance");
+        //obj1.batchChanges();
+        obj1.batchChanges.changed.push();
+        obj1.batchSave();
+        var obj2 = $("#GridNOK").ejGrid("instance");
+        obj2.batchChanges.changed.push();
+        obj2.batchSave();
+
+        var obj = $("#Grid").ejGrid("instance");
+        obj.endEdit();
+        obj.refreshContent();
+
+    }
+    function cellEditNOK(args) {
+        var result = this.getSelectedRecords();
+        //var gridInstance = $("#medicinesGrid").ejGrid("instance");
+        var Rowindex = this.selectedRowsIndexes;
+
+        var grid = this._id;
+        var Rcode = $("#Employee_ID").val();
+        var id = parseInt(Rowindex);
+        //alert(ComplaintNo);
+        $("#GridNOK").ejGrid("setCellValue", Rowindex, "Employee_ID", Rcode);
+    }
+    function cellEdit(args) {
+        var result = this.getSelectedRecords();
+        //var gridInstance = $("#medicinesGrid").ejGrid("instance");
+        var Rowindex = this.selectedRowsIndexes;
+
+        var grid = this._id;
+        var Rcode = $("#Employee_ID").val();
+        var id = parseInt(Rowindex);
+        //alert(ComplaintNo);
+        $("#EducationGrid").ejGrid("setCellValue", Rowindex, "EmployeeID", Rcode);
+        $("#EducationGrid").ejGrid("setCellValue", Rowindex, "Id", (id + 1));
+    }
+    function cancelss(args) {
+        if (window.requestType == "add") {
+            $.ajax({
+                type: "POST",
+                url: "CancelEmployeeAdd?employeeID=" + $('#Employee_ID').val(),
+                data: {},
+                datatype: "html",
+                contentType: 'application/x-www-form-urlencoded',
+                success: function (data) {
+
+                },
+                error: function () {
+                    alert("Error occured!!");
+                }
+            });
+        }
+        var obj = $("#Grid").ejGrid("instance")
+        obj.cancelEdit();
+    }
+    var flag = true;
+    function cellsave(args) {
+        if (flag) {
+            args.cancel = true;
+            if ($.inArray(args.rowData, this.batchChanges.changed) == -1)
+                this.batchChanges.changed.push(args.rowData);
+            var batchData = this.getBatchChanges();
+            if (batchData.changed.length > 0 && !$(args.cell).closest("tr").hasClass("e-insertedrow")) {
+                flag = false;
+                this.batchSave();
+            }
+            else
+                flag = false;
+        }
+        else if (!flag)
+            flag = true;
+    }
+</script>
+
